@@ -1,0 +1,49 @@
+input.parsley-success, select.parsley-success, textarea.parsley-success {
+    color: #000000;
+    background-color: #dfffd2;
+    border: 2px solid #2db032;
+}
+
+#customerbalance input, input.parsley-success {
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+    color: #000000;
+    background-color: #ffe3e3;
+    border: 2px solid #ff0026;
+}
+
+.parsley-errors-list {
+    margin: 8px 0 3px 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    opacity: 0;
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    color: #ff0026;
+    transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -ms-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+    opacity: 1;
+}
+
+.parsley-error {
+    border: 2px solid #ff0026 !important;
+}
+
+
+.parsley-errors-list > li {
+    font-size: 12px;
+    list-style: none;
+    color: #ff5b5b;
+}
