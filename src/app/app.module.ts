@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './footer/footer.component';
 import { StockComponent } from './stock/stock.component';
 import { SalesComponent } from './sales/sales.component';
 import { WetstockComponent } from './wetstock/wetstock.component';
@@ -21,13 +19,12 @@ import { VoucherAllComponent } from './voucher-all/voucher-all.component';
 import { VoucherCustComponent } from './voucher-cust/voucher-cust.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { HistoryComponent } from './history/history.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
-    FooterComponent,
     StockComponent,
     SalesComponent,
     WetstockComponent,
@@ -42,7 +39,8 @@ import { HistoryComponent } from './history/history.component';
     VoucherAllComponent,
     VoucherCustComponent,
     NotificationsComponent,
-    HistoryComponent
+    HistoryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	<title>Opremier</title>
-  	<base href="/">
+    <title>Dashboard Stock - OPremier</title>
+    <base href="/">
 
-	<link href="assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/vendors/nprogress/nprogress.css" rel="stylesheet">
     <link href="assets/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
@@ -21,60 +22,223 @@
     <link href="assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+
     <link href="assets/build/css/buttons.dataTables.min.css" rel="stylesheet">
     <link href="assets/build/css/icons.css" rel="stylesheet">
     <link href="assets/build/css/o_name.css" rel="stylesheet">
     <link href="assets/vendors/tanks/tanks.css" rel="stylesheet" type="text/css" />
-
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body class="nav-md">
-  	<app-root></app-root>
+  <div class="container body">
+    <div class="main_container">
 
-  	<!-- jQuery -->
-    <script src="assets/vendors/jquery/dist/jquery.min.js"></script>
+    	<div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title">
+              <a href="index.html" class="site_title"><i class="oltz oltz-logo"></i> <span>Premier</span></a>
+          </div>
 
-    <!-- Bootstrap -->
-    <script src="assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+          <div class="clearfix"></div>
 
-    <!-- FastClick -->
-    <script src="assets/vendors/fastclick/lib/fastclick.js"></script>
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                  <ul class="nav side-menu">
+                      <li><a><i class="fa fa-home"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                              <li><a href="/stock">Stock</a></li>
+                              <li><a href="/sales">Sales</a></li>
+                              <li><a href="/wetstock">Wetstock</a></li>
+                          </ul>
+                      </li>
 
-    <!-- NProgress -->
-    <script src="assets/vendors/nprogress/nprogress.js"></script>
+                      <li><a href="/branches"><i class="fa fa-sitemap"></i> Branches</a></li>
 
-    <!-- bootstrap-progressbar -->
-    <script src="assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+                      <li><a href="products.html"><i class="fa fa-tint"></i> Products</a></li>
 
-    <!-- bootstrap-daterangepicker -->
-    <script src="assets/vendors/moment/min/moment.min.js"></script>
-    <script src="assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+                      <li><a><i class="fa fa-asterisk"></i> Equipments <span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                              <li><a href="equipments_pos.html">POS Terminal</a></li>
+                              <li><a href="equipments_tanks.html">Tanks</a></li>
+                              <li><a href="equipments_pumps.html">Pumps</a></li>
+                              <li><a href="equipments_nozzles.html">Nozzles</a></li>
+                          </ul>
+                      </li>
+
+                      <li><a href="orders.html"><i class="fa fa-truck"></i> Orders</a></li>
+
+                      <li><a><i class="fa fa-qrcode"></i>Vouchers<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                              <li><a href="vouchers_dashboard.html">Dashboard</a></li>
+                              <li><a href="vouchers_list.html">All Vouchers</a></li>
+                              <li><a href="vouchers_customers.html">Customers</a></li>
+                          </ul>
+                      </li>
+
+                      <li><a href="notifications.html"><i class="fa fa-bell"></i>Notifications</a></li>
+
+                      <li><a href="history.html"><i class="fa fa-calendar"></i>History</a></li>
+
+                      <li><a><i class="fa fa-bar-chart"></i>Reports<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                              <li><a href="reports_daily.html">Daily Reports</a></li>
+                              <li><a href="reports_weekly.html">Weekly Reports</a></li>
+                              <li><a href="reports_monthly.html">Monthly Reports</a></li>
+                          </ul>
+                      </li>
+
+                      <li><a><i class="fa fa-users"></i>Users<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                              <li><a href="users_accounts.html">Accounts</a></li>
+                              <li><a href="users_logs.html">Logs</a></li>
+                          </ul>
+                      </li>
+
+                  </ul>
+              </div>
+          </div>
+          <!-- /sidebar menu -->
 
 
-    <!-- Datatables -->
-    <script src="assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="assets/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="assets/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="assets/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="assets/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="assets/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="assets/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="assets/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="assets/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="assets/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="assets/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+          <!-- /menu footer buttons -->
+          <div class="sidebar-footer hidden-small">
+              ...
+          </div>
+          <!-- /menu footer buttons -->
+        </div>
+      </div>
 
-	<!-- Sparkline -->
-	<script src="assets/vendors/sparkline/jquery.sparkline.min.js"></script>
-	<script src="assets/vendors/sparkline/config_sparkline.js"></script>
+      <!-- top navigation -->
+      <div class="top_nav">
+          <div class="nav_menu">
+              <nav>
+                  <div class="nav toggle">
+                      <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                  </div>
+
+                  <div class="nav navbar-nav navbar-main" style="border:0px solid red;">
+                      <span class="welcome">Welcome <strong>Jane Doe</strong></span>
 
 
-    <!-- Global script -->
-    <script src="assets/build/js/o_name.js"></script>
+                      <ul class="nav navbar-nav navbar-right" style="border:0px solid blue">
+                          <li class="">
+                              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                  <img src="assets/images/img.jpg" alt=""><span class="name">Jane Doe</span>
+                                  <span class=" fa fa-angle-down"></span>
+                              </a>
+                              <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                  <li><a href="profile.html"><i class="fa fa-user pull-right"></i> Profile</a></li>
+                                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                              </ul>
+                          </li>
+
+
+                          <li role="presentation" class="dropdown">
+                              <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                  <i class="fa fa-bell-o"></i>
+                                  <span class="badge bg-red">3</span>
+                              </a>
+
+                              <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                  <li>
+                                      <a href="#">
+                                          <span><span>NOTIFICATION TYPE</span><span class="time">3 mins ago</span></span>
+                                          <span class="message">Notification text text text text text...</span>
+                                      </a>
+                                  </li>
+
+                                  <li>
+                                      <a href="#">
+                                          <span><span>NOTIFICATION TYPE</span><span class="time">5 mins ago</span></span>
+                                          <span class="message">Notification text text text text text...</span>
+                                      </a>
+                                  </li>
+
+                                  <li>
+                                      <a href="#">
+                                          <span><span>NOTIFICATION TYPE</span><span class="time">11 mins ago</span></span>
+                                          <span class="message">Notification text text text text text...</span>
+                                      </a>
+                                  </li>
+                              </ul>
+
+                          </li>
+
+
+                          <li>
+                              <a href="settings.html"><i class="fa fa-gear"></i></a>
+                          </li>
+
+                          <li>
+                              <a href="help.html"><i class="fa fa-question-circle"></i></a>
+                          </li>
+
+                      </ul>
+                  </div>
+
+              </nav>
+          </div>
+      </div>
+      <!-- /top navigation -->
+
+
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <app-root></app-root>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      <footer>
+          <div class="pull-right">
+              Powered by Oltranz.com
+          </div>
+          <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
+
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="assets/vendors/jquery/dist/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- FastClick -->
+  <script src="assets/vendors/fastclick/lib/fastclick.js"></script>
+
+  <!-- NProgress -->
+  <script src="assets/vendors/nprogress/nprogress.js"></script>
+
+  <!-- bootstrap-progressbar -->
+  <script src="assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+
+  <!-- bootstrap-daterangepicker -->
+  <script src="assets/vendors/moment/min/moment.min.js"></script>
+  <script src="assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+
+  <!-- Datatables -->
+  <script src="assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="assets/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="assets/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="assets/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="assets/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="assets/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="assets/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="assets/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="assets/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="assets/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="assets/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+  <script src="assets/build/js/o_name.js"></script>
 
 </body>
 </html>

@@ -1,3 +1,520 @@
-<p>
-  stock works!
-</p>
+<div class="row">
+    <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Week</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Month</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Quarter</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
+    </div>
+</div>
+
+<!-- TOP TILES -->
+<div class="row top_tiles">
+
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <div class="count">700,000 L</div>
+            <h3>Super</h3>
+            <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 3% </i> From last Week</span></p>
+        </div>
+    </div>
+
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <div class="count">200,000 L</div>
+            <h3>Gasoil</h3>
+            <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 15% </i> From last Week</span></p>
+        </div>
+    </div>
+
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <div class="count">100,000 L</div>
+            <h3>Kerosene</h3>
+            <p><span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span></p>
+        </div>
+    </div>
+</div>
+<!-- End TOP TILES -->
+
+<!-- INNER TILES -->
+<div class="row">
+
+    <!-- CHART -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile ">
+            <div class="x_title">
+                <h2>Transaction Summary <small>Weekly progress</small></h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>Dec 30, 2014 - Jan 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div id="chart_stock_qty_daily" style="height: 330px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+    <!-- CHART -->
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel tile ">
+            <div class="x_title">
+                <h2>Tanks Capacity</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>Dec 30, 2014 - Jan 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div id="chart_stock_tanks_qty" style="height: 330px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+
+    <!-- CHART -->
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel tile ">
+            <div class="x_title">
+                <h2>Product Sales</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>Dec 30, 2014 - Jan 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div id="chart_sales_products" style="height: 330px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+
+    <!-- CHART -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile ">
+            <div class="x_title">
+                <h2>Tanks Capacities</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>Dec 30, 2014 - Jan 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div id="tank1" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
+                <div id="tank2" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
+                <div id="tank3" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+    <!-- tabs -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile ">
+            <div class="x_title">
+                <h2>Tanks Structures</h2>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <!-- -->
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="tank1-tab" role="tab" data-toggle="tab" aria-expanded="true">Tank : PMS1</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="tank2-tab" data-toggle="tab" aria-expanded="false">Tank : PMS2</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content3" role="tab" id="tank3-tab2" data-toggle="tab" aria-expanded="false">Tank : AGO1</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="tank1-tab">
+                            <!-- BoxTank1  -->
+                            <div>
+                                <div class="col-xs-12" style="padding:27px;">
+
+                                    <!-- TANK -->
+                                    <div class="container-fluid super">
+
+
+                                        <!-- a tank -->
+                                        <div class="col-xs-12">
+                                            <div class="tankstructure">
+
+                                                <div class="thetank">
+                                                    <div id='levelbg_pms1'></div>
+                                                </div>
+                                                <div class="tankmeter" style="background:url(assets/vendors/tanks/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
+                                                <label>PMS1</label>
+
+                                                <div class="quantities">
+                                                    <span class="quantity_t">Theoretical Quantity<input type="number" id="quantity_theo_pms1" min="0" max="30000" value="16050" oninput="mySuperDiff()" /></span>
+                                                    <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_pms1" min="0" max="30000" value="16780" oninput="mySuperDiff()" disabled="disabled"/><em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">Latest : dd/mm/yyyy - 00:00:00 </em></span>
+                                                    <span class="quantity_diff">Difference <p id="quantity_diff_pms1"></p></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--  end a tank-->
+
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+
+                                            <div class="col-xs-4 tank_pump">Pump 1</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+                                            </div>
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+                                            <div class="col-xs-4 tank_pump">Pump 2</div>
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+
+                                            <div class="col-xs-4 tank_pump">Pump 3</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+                                            </div>
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+                                            <div class="col-xs-4 tank_pump">Pump 4</div>
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+                                    </div>
+                                    <!-- TANK -->
+
+                                </div>
+                            </div>
+                            <!-- END BoxTank1 -->
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="tank2-tab">
+                            <!-- BoxTank2  -->
+                            <div>
+                                <div class="col-xs-12" style="padding:27px;">
+                                    <!-- TANK -->
+                                    <div class="container-fluid gasoil">
+
+
+                                        <!-- a tank -->
+                                        <div class="col-xs-12">
+                                            <div class="tankstructure">
+
+                                                <div class="thetank">
+                                                    <div id='levelbg_ago1'></div>
+                                                </div>
+                                                <div class="tankmeter" style="background:url(assets/vendors/tanks/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
+                                                <label>AGO </label>
+
+                                                <div class="quantities">
+                                                    <span class="quantity_t">Theoretical Quantity<input type="number" id="quantity_theo_ago1" min="0" max="20000" value="19600" oninput="mySuperDiff()" /></span>
+                                                    <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_ago1" min="0" max="20000" value="19780" oninput="mySuperDiff()" disabled="disabled"/><em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">Latest : dd/mm/yyyy - 00:00:00 </em></span>
+                                                    <span class="quantity_diff">Difference <p id="quantity_diff_ago1"></p></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--  end a tank-->
+
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+
+                                            <div class="col-xs-4 tank_pump">Pump 1</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+                                            </div>
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+                                            <div class="col-xs-4 tank_pump">Pump 2</div>
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+
+
+
+
+                                    </div>
+                                    <!-- TANK -->
+                                </div>
+                            </div>
+                            <!-- End BoxTank2 -->
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="tank3-tab">
+                            <!-- BoxTank3 -->
+                            <div>
+                                <div class="col-xs-12" style="padding:27px;">
+                                    <!-- TANK -->
+                                    <div class="container-fluid kerosene">
+
+
+                                        <!-- a tank -->
+                                        <div class="col-xs-12">
+                                            <div class="tankstructure">
+
+                                                <div class="thetank">
+                                                    <div id='levelbg_ker1'></div>
+                                                </div>
+                                                <div class="tankmeter" style="background:url(assets/vendors/tanks/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
+                                                <label>KEROSENE TANK</label>
+
+                                                <div class="quantities">
+                                                    <span class="quantity_t">Theoretical Quantity<input type="number" id="quantity_theo_ker1" min="0" max="11000" value="5600" oninput="mySuperDiff()" /></span>
+                                                    <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_ker1" min="0" max="11000" value="5000" oninput="mySuperDiff()" disabled="disabled"/><em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">Latest : dd/mm/yyyy - 00:00:00 </em></span>
+                                                    <span class="quantity_diff">Difference <p id="quantity_diff_ker1"></p></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!--  end a tank-->
+
+
+
+                                        <!-- PUMP -->
+                                        <div class="col-xs-6 pumpl_active">
+
+                                            <div class="col-xs-3">
+
+                                                <!-- Nozzle -->
+                                                <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
+                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+
+                                            </div>
+
+
+                                            <div class="col-xs-4 tank_pump">Pump 1</div>
+
+                                            <div class="col-xs-3">
+                                                <!-- Nozzle -->
+                                                <span class="col-xs-12 nozzle_box">
+                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
+                                                <label class="indexes">123456789</label>
+                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                </span>
+                                                <!-- End Nozzle -->
+                                            </div>
+
+                                            <div class="col-xs-2">&nbsp;</div>
+
+                                        </div>
+                                        <!-- PUMP -->
+
+
+
+
+                                    </div>
+                                    <!-- TANK -->
+                                </div>
+                            </div>
+                            <!-- BoxTank3 -->
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+            </div>
+        </div>
+    </div>
+    <!-- End tabs-->
+
+
+
+</div>
+<!-- End INNER TILES -->

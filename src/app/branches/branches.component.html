@@ -1,104 +1,97 @@
-<!-- page content -->
-<div class="right_col" role="main">
+<!-- INNER TILES -->
+<div class="row">
+    <!-- -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Branches List <small> all</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <button class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target=".bs-example-modal-form">ADD A BRANCH</button>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+                <table id="datatable-buttons" class="table table-striped table-bordered">
+                    <thead>
+
+                        <tr>
+                            <th>Branch Name</th>
+                            <th>Tanks Numbers</th>
+                            <th>Tanks Quantities</th>
+                            <th>POS Allocated</th>
+                            <th>Manager Name</th>
+                            <th>Manager Contacts</th>
+                            <th>Pumps Attendants</th>
+                            <th style="text-align:center;">Action</th>
+                        </tr>
+
+                    </thead>
 
 
-    <!-- INNER TILES -->
-    <div class="row">
-        <!-- -->
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Branches List <small> all</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <button class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target=".bs-example-modal-form">ADD A BRANCH</button>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
+                    <tbody>
 
-                <div class="x_content">
+                        <tr>
+                            <td>Kimironko</td>
+                            <td>3</td>
 
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                        <thead>
+                            <td style="text-align:center;">
+                                <div class="tanks_datatable"><span class="minichart_tanks">75,25</span> <label>PMS1 :</label> 00,000 L</div>
+                                <div class="tanks_datatable"><span class="minichart_tanks">90,10</span> <label>PMS2 :</label> 00,000 L </div>
+                                <div class="tanks_datatable"><span class="minichart_tanks">80,20</span> <label>AGO1 :</label> 00,000 L </div>
+                            </td>
 
-                            <tr>
-                                <th>Branch Name</th>
-                                <th>Tanks Numbers</th>
-                                <th>Tanks Quantities</th>
-                                <th>POS Allocated</th>
-                                <th>Manager Name</th>
-                                <th>Manager Contacts</th>
-                                <th>Pumps Attendants</th>
-                                <th style="text-align:center;">Action</th>
-                            </tr>
+                            <td style="text-align:center;">
+                                <div class="pos_datatable">20 <br><span class="minichart_pos">15,5</span></div>
+                            </td>
+                            <td>Name K</td>
+                            <td>+250 780 000 000</td>
+                            <td>20</td>
+                            <td style="text-align:center;">
+                                <a class="action_icon ico_view" href="preview_branch_dashboard.xhtml" target="_blank"><i class="fa fa-eye"></i></a>
+                                <a class="action_icon ico_edit" href="#" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+                            </td>
+                        </tr>
 
-                        </thead>
+                        <tr>
+                            <td>Gikondo</td>
+                            <td>3</td>
 
+                            <td style="text-align:center;">
+                                <div class="tanks_datatable"><span class="minichart_tanks">75,25</span> <label>PMS1 :</label> 00,000 L </div>
+                                <div class="tanks_datatable"><span class="minichart_tanks">90,10</span> <label>PMS2 :</label> 00,000 L</div>
+                                <div class="tanks_datatable"><span class="minichart_tanks">80,20</span> <label>AGO1 :</label> 00,000 L </div>
+                            </td>
 
-                        <tbody>
+                            <td style="text-align:center;">
+                                <div class="pos_datatable">18 <br><span class="minichart_pos">18,2</span></div>
+                            </td>
 
-                            <tr>
-                                <td>Kimironko</td>
-                                <td>3</td>
-
-                                <td style="text-align:center;">
-                                    <div class="tanks_datatable"><span class="minichart_tanks">75,25</span> <label>PMS1 :</label> 00,000 L</div>
-                                    <div class="tanks_datatable"><span class="minichart_tanks">90,10</span> <label>PMS2 :</label> 00,000 L </div>
-                                    <div class="tanks_datatable"><span class="minichart_tanks">80,20</span> <label>AGO1 :</label> 00,000 L </div>
-                                </td>
-
-                                <td style="text-align:center;">
-                                    <div class="pos_datatable">20 <br><span class="minichart_pos">15,5</span></div>
-                                </td>
-                                <td>Name K</td>
-                                <td>+250 780 000 000</td>
-                                <td>20</td>
-                                <td style="text-align:center;">
-                                    <a class="action_icon ico_view" href="preview_branch_dashboard.xhtml" target="_blank"><i class="fa fa-eye"></i></a>
-                                    <a class="action_icon ico_edit" href="#" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
-                                    <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Gikondo</td>
-                                <td>3</td>
-
-                                <td style="text-align:center;">
-                                    <div class="tanks_datatable"><span class="minichart_tanks">75,25</span> <label>PMS1 :</label> 00,000 L </div>
-                                    <div class="tanks_datatable"><span class="minichart_tanks">90,10</span> <label>PMS2 :</label> 00,000 L</div>
-                                    <div class="tanks_datatable"><span class="minichart_tanks">80,20</span> <label>AGO1 :</label> 00,000 L </div>
-                                </td>
-
-                                <td style="text-align:center;">
-                                    <div class="pos_datatable">18 <br><span class="minichart_pos">18,2</span></div>
-                                </td>
-
-                                <td>Name G</td>
-                                <td>+250 780 000 000</td>
-                                <td>20</td>
-                                <td style="text-align:center;">
-                                    <a class="action_icon ico_view" href="preview_branch_dashboard.xhtml" target="_blank"><i class="fa fa-eye"></i></a>
-                                    <a class="action_icon ico_edit" href="#" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
-                                    <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                                </td>
-                            </tr>
+                            <td>Name G</td>
+                            <td>+250 780 000 000</td>
+                            <td>20</td>
+                            <td style="text-align:center;">
+                                <a class="action_icon ico_view" href="preview_branch_dashboard.xhtml" target="_blank"><i class="fa fa-eye"></i></a>
+                                <a class="action_icon ico_edit" href="#" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+                            </td>
+                        </tr>
 
 
 
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- -->
-
-
-
     </div>
-    <!-- End INNER TILES -->
+    <!-- -->
+
+
 
 </div>
-<!-- /page content -->
+<!-- End INNER TILES -->
 
 
 <!-- Modal contents -->
