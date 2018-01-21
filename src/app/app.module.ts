@@ -1,25 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { ChartModule } from 'angular-highcharts';
+
 
 import { AppComponent } from './app.component';
-import { StockComponent } from './stock/stock.component';
-import { SalesComponent } from './sales/sales.component';
-import { WetstockComponent } from './wetstock/wetstock.component';
-import { BranchesComponent } from './branches/branches.component';
+import { StockComponent } from './components/stock/stock.component';
+import { SalesComponent } from './components/sales/sales.component';
+import { WetstockComponent } from './components/wetstock/wetstock.component';
+import { BranchesComponent } from './components/branches/branches.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { ProductsComponent } from './products/products.component';
-import { PosTerminalComponent } from './pos-terminal/pos-terminal.component';
-import { TanksComponent } from './tanks/tanks.component';
-import { PumpsComponent } from './pumps/pumps.component';
-import { NozzlesComponent } from './nozzles/nozzles.component';
-import { OrdersComponent } from './orders/orders.component';
-import { VoucherDashComponent } from './voucher-dash/voucher-dash.component';
-import { VoucherAllComponent } from './voucher-all/voucher-all.component';
-import { VoucherCustComponent } from './voucher-cust/voucher-cust.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { HistoryComponent } from './history/history.component';
-import { LoginComponent } from './login/login.component';
+import { ProductsComponent } from './components/products/products.component';
+import { PosTerminalComponent } from './components/pos-terminal/pos-terminal.component';
+import { TanksComponent } from './components/tanks/tanks.component';
+import { PumpsComponent } from './components/pumps/pumps.component';
+import { NozzlesComponent } from './components/nozzles/nozzles.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { VoucherDashComponent } from './components/voucher-dash/voucher-dash.component';
+import { VoucherAllComponent } from './components/voucher-all/voucher-all.component';
+import { VoucherCustComponent } from './components/voucher-cust/voucher-cust.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { HistoryComponent } from './components/history/history.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
@@ -40,11 +43,13 @@ import { LoginComponent } from './login/login.component';
     VoucherCustComponent,
     NotificationsComponent,
     HistoryComponent,
-    LoginComponent
+    LoginComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
