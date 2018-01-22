@@ -12,7 +12,7 @@ import { ProductsComponent }      from './components/products/products.component
 
 // Define app routes
 const routes: Routes = [
-	{ path: '',   redirectTo: '/login', pathMatch: 'full' },
+	/*{ path: '',   redirectTo: '/login', pathMatch: 'full' },*/
   { path: 'branches', component: BranchesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'stock', component: StockComponent },

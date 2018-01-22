@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_CONFIGURATION} from '@angular/router'
+import { Router } from '@angular/router';
+import { TokenParams } from '../../classes/TokenParams';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +10,45 @@ import { ROUTER_CONFIGURATION} from '@angular/router'
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  tokenParams: TokenParams;
+  username:string;
+  password:string;
+  alert: string; // alert if login fails
+
+  constructor(
+	  	private router: Router,
+	  	private authService: AuthService
+  	) { }
 
   ngOnInit() {
   }
 
   /* Authentication */ 
   loginUser(e){
-  	e.preventDefault();
+
+  	e.preventDefault(); // Prevent the form from submiting in default mode
   	
-  	var username = e.target.elements[0].value;
-  	var password = e.target.elements[1].value;
+  	// Get user form data
+  	this.username = e.target.elements[0].value;
+  	this.password = e.target.elements[1].value;
 
-  	if (true){
-  		
-  	}
+  	this.authService.login(this.username, this.password)
+  		.subscribe(
+  				data=>{
+  					this.tokenParams =  data; 
+  					this.authService.AccessToken = this.tokenParams.access_token;
 
-  	console.log(username);
+  					console.log(data);
+  					
+  					// Check if response has error
+  					if(data.error){
+  						this.alert = "Invalid username or password!";
+  					}else{
+  						// Set route to dashboard
+  						this.router.navigate(['/stock']);
+  					}
+
+  				}
+  			);
   }
 }

@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { ChartModule } from 'angular-highcharts';
 
+import { Http, HttpModule } from '@angular/http';
+import { AuthService } from './services/auth.service';
+
 
 import { AppComponent } from './app.component';
 import { StockComponent } from './components/stock/stock.component';
@@ -49,9 +52,10 @@ import { NavComponent } from './nav/nav.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartModule
+    ChartModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

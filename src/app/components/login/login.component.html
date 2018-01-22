@@ -35,6 +35,9 @@
                     <h2><img src="assets/build/fonts/oltz_logo.svg" class="img-responsive"></h2>
                     <form (submit)="loginUser($event)">
                         <h1>Login Form</h1>
+                        <!-- Alert -->
+                        <div class="alert alert-danger" role="alert"> {{ alert }}</div>
+                        <!-- /Alert -->
                         <div>
                             <input type="text" class="form-control" placeholder="Username" required="" />
                         </div>
