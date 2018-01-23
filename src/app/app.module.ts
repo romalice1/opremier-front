@@ -5,7 +5,9 @@ import { ChartModule } from 'angular-highcharts';
 
 import { Http, HttpModule } from '@angular/http';
 import { AuthService } from './services/auth.service';
-
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MyHttpInterceptor } from './services/MyHttp-interceptor';
 
 import { AppComponent } from './app.component';
 import { StockComponent } from './components/stock/stock.component';
@@ -53,9 +55,18 @@ import { NavComponent } from './nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     ChartModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService, 
+    CookieService,
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: MyHttpInterceptor, 
+      multi: true 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

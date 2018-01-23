@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import { Headers, Http, HttpModule } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 
-import { TokenParams } from '../auth/TokenParams';
+import { TokenParams } from '../classes/TokenParams';
 
 @Injectable()
 export class AuthService{

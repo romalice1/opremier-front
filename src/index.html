@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dashboard Stock - OPremier</title>
+    <title> {{title}} </title>
     <base href="/">
 
     <link href="assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -118,7 +118,7 @@
                   </div>
 
                   <div class="nav navbar-nav navbar-main" style="border:0px solid red;">
-                      <span class="welcome">Welcome <strong>Jane Doe</strong></span>
+                      <span class="welcome">Welcome <strong>{{session.firstName}} {{session.lastName}}</strong></span>
 
 
                       <ul class="nav navbar-nav navbar-right" style="border:0px solid blue">
