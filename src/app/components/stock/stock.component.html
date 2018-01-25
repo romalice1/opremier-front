@@ -59,7 +59,7 @@
             </div>
 
             <div class="x_content">
-                <div [chart]="chart"></div>
+                <div [chart]="transSummaryChart"></div>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="x_content">
-                <div id="chart_stock_tanks_qty" style="height: 330px; margin: 0 auto;"></div>
+                <div [chart]="tanksCapacityChart" style="height: 330px; margin: 0 auto;"></div>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
             </div>
 
             <div class="x_content">
-                <div id="chart_sales_products" style="height: 330px; margin: 0 auto;"></div>
+                <div [chart]="productSalesChart" style="height: 330px; margin: 0 auto;"></div>
             </div>
         </div>
     </div>
@@ -124,9 +124,9 @@
             </div>
 
             <div class="x_content">
-                <div id="tank1" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
-                <div id="tank2" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
-                <div id="tank3" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
+                <div [chart]="tank1Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
+               <!--  <div [chart]="tank2Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
+                <div [chart]="tank3Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div> -->
             </div>
         </div>
     </div>

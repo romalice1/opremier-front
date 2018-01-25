@@ -4,6 +4,10 @@ import { TokenParams } from '../../classes/TokenParams';
 import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Headers, Http, HttpModule } from '@angular/http';
+import { UserService } from '../../services/user.service';
+
+// Import the interface
+// import { SessionParams } from '../../classes/session/SessionParams';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +28,8 @@ export class LoginComponent implements OnInit {
 	  	private router: Router,
 	  	private authService: AuthService,
 	  	private cookieService: CookieService,
-	  	private http: Http
+	  	private http: Http,
+      private user: UserService
   	) { }
 
   ngOnInit() {
@@ -62,8 +67,14 @@ export class LoginComponent implements OnInit {
 	  								lastName: res.json().lastName
 	  							};
 
+                  var stringSessionData = JSON.stringify(sessionData);
+                  console.log("Saving Session: "+stringSessionData);
+
 		  						//1. Create session cookie
-		  						this.cookieService.set( 'opremier-session', String(sessionData));
+		  						this.cookieService.set( 'opremier-session', stringSessionData);
+
+                  //Change user login state
+                  this.user.setUserLoggedIn(true);
 
 	  							// Set route to dashboard
 	  							this.router.navigate(['/stock']);

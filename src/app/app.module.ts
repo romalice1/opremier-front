@@ -8,6 +8,8 @@ import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MyHttpInterceptor } from './services/MyHttp-interceptor';
+import { UserService } from './services/user.service';
+import { AuthguardGuard } from './services/authguard.guard';
 
 import { AppComponent } from './app.component';
 import { StockComponent } from './components/stock/stock.component';
@@ -60,7 +62,9 @@ import { NavComponent } from './nav/nav.component';
   ],
   providers: [
     AuthService, 
-    CookieService,
+    CookieService,  
+    UserService,
+    AuthguardGuard,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: MyHttpInterceptor, 

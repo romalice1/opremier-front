@@ -1,5 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthguardGuard } from './services/authguard.guard';
 
 // Import App routes
 import { BranchesComponent }      from './components/branches/branches.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
 	/*{ path: '',   redirectTo: '/login', pathMatch: 'full' },*/
   { path: 'branches', component: BranchesComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'stock', component: StockComponent },
+  { path: 'stock', canActivate: [AuthguardGuard], component: StockComponent },
   { path: 'sales', component: SalesComponent },
   { path: 'wetstock', component: WetstockComponent },
   { path: 'products', component: ProductsComponent },
