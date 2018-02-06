@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { GaugeModule } from 'angular-gauge';
+import { SlideMenuModule } from 'cuppa-ng2-slidemenu/cuppa-ng2-slidemenu'; // For sidebar menu
 
 import { ChartModule } from 'angular-highcharts';
 
@@ -30,6 +32,8 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { HistoryComponent } from './components/history/history.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './nav/nav.component';
+import { UserAccountsComponent } from './components/user-accounts/user-accounts.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 
 @NgModule({
@@ -51,14 +55,18 @@ import { NavComponent } from './nav/nav.component';
     NotificationsComponent,
     HistoryComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    UserAccountsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ChartModule,
+    SlideMenuModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    GaugeModule.forRoot()
   ],
   providers: [
     AuthService, 

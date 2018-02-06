@@ -1,3 +1,6 @@
+<!-- <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu> -->
+
+<div *ngIf="isLoggedIn" >
 <div class="col-md-3 left_col">
 <div class="left_col scroll-view">
   <div class="navbar nav_title">
@@ -20,43 +23,37 @@
 
               <li><a routerLink="/branches"><i class="fa fa-sitemap"></i> Branches</a></li>
 
-              <li><a href="products.html"><i class="fa fa-tint"></i> Products</a></li>
+              <li><a routerLink="/products"><i class="fa fa-tint"></i> Products</a></li>
 
               <li><a><i class="fa fa-asterisk"></i> Equipments <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="equipments_pos.html">POS Terminal</a></li>
-                      <li><a href="equipments_tanks.html">Tanks</a></li>
-                      <li><a href="equipments_pumps.html">Pumps</a></li>
-                      <li><a href="equipments_nozzles.html">Nozzles</a></li>
+                      <li><a routerLink="/pos-terminal">POS Terminal</a></li>
+                      <li><a routerLink="/tanks">Tanks</a></li>
+                      <li><a routerLink="/pumps">Pumps</a></li>
+                      <li><a routerLink="/nozzles">Nozzles</a></li>
                   </ul>
               </li>
 
-              <li><a href="orders.html"><i class="fa fa-truck"></i> Orders</a></li>
+              <li><a routerLink="/orders"><i class="fa fa-truck"></i> Orders</a></li>
 
               <li><a><i class="fa fa-qrcode"></i>Vouchers<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="vouchers_dashboard.html">Dashboard</a></li>
-                      <li><a href="vouchers_list.html">All Vouchers</a></li>
-                      <li><a href="vouchers_customers.html">Customers</a></li>
+                      <li><a routerLink="/vouchers-dash">Dashboard</a></li>
+                      <li><a routerLink="/vouchers-all">All Vouchers</a></li>
+                      <li><a routerLink="/vouchers-cust">Customers</a></li>
                   </ul>
               </li>
 
-              <li><a href="notifications.html"><i class="fa fa-bell"></i>Notifications</a></li>
+              <li><a routerLink="/notifications"><i class="fa fa-bell"></i>Notifications</a></li>
 
-              <li><a href="history.html"><i class="fa fa-calendar"></i>History</a></li>
+              <li><a routerLink="/history"><i class="fa fa-calendar"></i>History</a></li>
 
-              <li><a><i class="fa fa-bar-chart"></i>Reports<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                      <li><a href="reports_daily.html">Daily Reports</a></li>
-                      <li><a href="reports_weekly.html">Weekly Reports</a></li>
-                      <li><a href="reports_monthly.html">Monthly Reports</a></li>
-                  </ul>
-              </li>
+              <li><a routerLink="/reports"><i class="fa fa-calendar"></i>Reports</a></li>
 
               <li><a><i class="fa fa-users"></i>Users<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                      <li><a href="users_accounts.html">Accounts</a></li>
-                      <li><a href="users_logs.html">Logs</a></li>
+                      <li><a routerLink="user-accounts">Accounts</a></li>
+                      <li><a routerLink="users-logs">Logs</a></li>
                   </ul>
               </li>
 
@@ -83,18 +80,18 @@
           </div>
 
           <div class="nav navbar-nav navbar-main" style="border:0px solid red;">
-              <span class="welcome">Welcome <strong> Jane DOe</strong></span>
+              <span class="welcome">Welcome <strong> {{ session.name }}</strong></span>
 
 
               <ul class="nav navbar-nav navbar-right" style="border:0px solid blue">
                   <li class="">
                       <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                          <img src="assets/images/img.jpg" alt=""><span class="name">Jane Doe</span>
+                          <img src="assets/images/img.jpg" alt=""><span class="name">{{ session.nickName }}</span>
                           <span class=" fa fa-angle-down"></span>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">
                           <li><a href="profile.html"><i class="fa fa-user pull-right"></i> Profile</a></li>
-                          <li><a routerLink='/login'><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                          <li><a (click)="userLogout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                       </ul>
                   </li>
 
@@ -146,3 +143,4 @@
   </div>
 </div>
 <!-- /top navigation -->
+</div>

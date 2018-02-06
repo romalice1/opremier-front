@@ -1,27 +1,28 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
-        <button type="button" class="col-xs-2 btn btn-default btn-sm" routerLink='/branches'>Today</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
         <button type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
         <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Week</button>
         <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Month</button>
         <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Quarter</button>
         <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
     </div>
-</div>
+</div> -->
 
 <!-- TOP TILES -->
 <div class="row top_tiles">
 
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+    <div  *ngFor="let product of productsData" class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-tint"></i></div>
-            <div class="count">700,000 L</div>
-            <h3>Super</h3>
+            <div class="count">{{ product.currentQuantity }} L</div>
+            <h3>{{ product.product.name }}</h3>
             <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 3% </i> From last Week</span></p>
         </div>
     </div>
 
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <!-- <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-tint"></i></div>
             <div class="count">200,000 L</div>
@@ -37,7 +38,8 @@
             <h3>Kerosene</h3>
             <p><span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span></p>
         </div>
-    </div>
+    </div> -->
+
 </div>
 <!-- End TOP TILES -->
 
@@ -124,9 +126,37 @@
             </div>
 
             <div class="x_content">
-                <div [chart]="tank1Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
-               <!--  <div [chart]="tank2Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div>
-                <div [chart]="tank3Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;"></div> -->
+                <div idd="container-chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red; text-align: center;">
+                    <strong class='text-muted'>TANK 1</strong>
+                    <mwl-gauge
+                      [max]="100"
+                      [dialStartAngle]="-90"
+                      [dialEndAngle]="-90.001"
+                      [value]="90"
+                      [animated]="true"
+                      [animationDuration]="1">
+                    </mwl-gauge>
+                </div>
+                <div class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;">
+                    <mwl-gauge
+                      [max]="100"
+                      [dialStartAngle]="-90"
+                      [dialEndAngle]="-90.001"
+                      [value]="50"
+                      [animated]="true"
+                      [animationDuration]="1">
+                    </mwl-gauge>
+                </div>
+                <div [chart]="tank3Chart" class="col-xs-12 col-sm-4" style="height: 250px; margin: 0 auto;border:0px solid red;">
+                    <mwl-gauge
+                      [max]="100"
+                      [dialStartAngle]="-90"
+                      [dialEndAngle]="-90.001"
+                      [value]="20"
+                      [animated]="true"
+                      [animationDuration]="1">
+                    </mwl-gauge>
+                </div>
             </div>
         </div>
     </div>
@@ -190,9 +220,8 @@
 
                                                 <!-- Nozzle -->
                                                 <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                <label class="indexes">123456789</label>
-                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                    <label class="indexes">123456789</label>
+                                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
 
@@ -204,8 +233,7 @@
                                             <div class="col-xs-3">
                                                 <!-- Nozzle -->
                                                 <span class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                <label class="indexes">123456789</label>
+                                                    <label class="indexes">123456789</label>
                                                 <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
@@ -225,8 +253,7 @@
                                             <div class="col-xs-3">
                                                 <!-- Nozzle -->
                                                 <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                <label class="indexes">123456789</label>
+                                                    <label class="indexes">123456789</label>
                                                 <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
@@ -239,8 +266,7 @@
 
                                                 <!-- Nozzle -->
                                                 <span class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                <label class="indexes">123456789</label>
+                                                    <label class="indexes">123456789</label>
                                                 <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
@@ -258,8 +284,7 @@
 
                                                 <!-- Nozzle -->
                                                 <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                <label class="indexes">123456789</label>
+                                                    <label class="indexes">123456789</label>
                                                 <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
@@ -272,8 +297,7 @@
                                             <div class="col-xs-3">
                                                 <!-- Nozzle -->
                                                 <span class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                <label class="indexes">123456789</label>
+                                                    <label class="indexes">123456789</label>
                                                 <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
@@ -293,9 +317,8 @@
                                             <div class="col-xs-3">
                                                 <!-- Nozzle -->
                                                 <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                <label class="indexes">123456789</label>
-                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                    <label class="indexes">123456789</label>
+                                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
 
@@ -307,9 +330,8 @@
 
                                                 <!-- Nozzle -->
                                                 <span class="col-xs-12 nozzle_box">
-                                                                                                                            <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                <label class="indexes">123456789</label>
-                                                <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                                    <label class="indexes">123456789</label>
+                                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
                                                 </span>
                                                 <!-- End Nozzle -->
 

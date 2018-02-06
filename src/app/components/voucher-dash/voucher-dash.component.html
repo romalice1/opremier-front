@@ -1,3 +1,256 @@
-<p>
-  voucher-dash works!
-</p>
+<div class="row">
+        <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
+            <button type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
+            <button type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
+            <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Week</button>
+            <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Month</button>
+            <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Quarter</button>
+            <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
+        </div>
+    </div>
+
+    <!-- TOP TILES -->
+    <div class="row top_tiles">
+
+        <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-vouchers text-center">
+                <div class="icon"><i class="fa fa-money"></i></div>
+                <div class="count">000,000 FRW</div>
+                <h3>Balance</h3>
+            </div>
+        </div>
+
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <button class="tile-vouchers col-xs-12 text-center blue" data-toggle="modal" data-target=".bs-example-modal-addfund">
+                <i class="fa fa-plus-square"></i>Add Fund
+            </button>
+        </div>
+
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <button class="tile-vouchers col-xs-12 text-center green" id="btn_evouchers">
+                <i class="fa fa-qrcode"></i> Generate Vouchers
+            </button>
+        </div>
+    </div>
+    <!-- End TOP TILES -->
+
+
+
+    <!-- INNER TILES -->
+    <div class="row">
+
+
+        <!-- CHART -->
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel tile">
+                <div class="x_title">
+                    <h2>Vouchers Usage</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div [chart]="voucherUsageChart" id="chart_vouchers_usage" style="height:400px; margin: 0 auto;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End CHART -->
+
+
+        <!-- CHART -->
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel tile">
+                <div class="x_title">
+                    <h2>Top 10 Customers</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div [chart]="voucherClientsChart" id="chart_vouchers_clients" style="height:400px; margin: 0 auto;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End CHART -->
+
+    </div>
+    <!-- End INNER TILES -->
+
+
+<!-- Modal_FORM -->
+<div class="modal fade bs-example-modal-addfund" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <form class="form-horizontal form-label-left input_mask">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                              </button>
+                    <h4 class="modal-title" id="myModalLabel">Add Fund</h4>
+                </div>
+
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Customer</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <select class="form-control">
+                         <option>Customer 1</option>
+                         <option>Customer 2</option>
+                         <option>Customer 3</option>
+                    </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Amount</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Enter amount in FRW">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal_FORM -->
+
+
+<!-- PopupGenerateVouchers -->
+<div class="modal fade" id="modal_evouchers" role="dialog">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content">
+            <div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Generate Vouchers</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- -->
+                <form id="generatevouchers_steps" action="">
+
+                    <fieldset>
+                        <legend>Select a Client</legend>
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 selectclient">
+                                <div class="form-group">
+                                    <label for="clients">Select a Customer</label>
+                                    <select class="form-control" name="id" id='customerslist' data-parsley-group="block0" required="required" data-parsley-error-message="You did not select a Customer">
+                                            <option value=""></option>                                                    
+                                            <option value="c1">Customer 1</option>
+                                            <option value="c2">Customer 2</option>
+                                            <option value="c3">Customer 3</option>
+                                        </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 clientbalance">
+                                <div class="form-group">
+                                    <label for="exampleInputName3">Client's Balance</label>
+                                    <span class="boxbalance"><input type="text" name="balance" id="customerbalance" placeholder="0" data-parsley-group="block0" disabled="disabled" />
+                                            Rwandan Francs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset>
+                        <legend>Select Voucher Pack</legend>
+                        <div class="col-xs-12">
+
+                            <section class="packs row">
+
+                                <div class="col-xs-12 col-sm-3">
+                                    <label>
+                                            <input type="checkbox" name="amount" class="voucher_checkbox" value="5000" data-parsley-mincheck="1" data-parsley-group="block1" required="required" data-parsley-error-message="Select at least 1 Voucher Pack" id="pack5000" /><h3>Voucher Pack 1</h3>
+                                            <span>5,000 FRW</span>                                                    
+                                        </label>
+                                    <input id="qtyof5000" class="checkbo" name="number" type="number" min="0" max="50" placeholder='Enter quantity' />
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-3">
+                                    <label>
+                                            <input type="checkbox" name="amount" class="voucher_checkbox" value="100000"  data-parsley-mincheck="1" data-parsley-group="block1" required="required" id="pack10000"/><h3>Voucher Pack 2</h3>
+                                            <span>10,000 FRW</span>   
+                                            
+                                        </label>
+                                    <input id="qtyof10000" class="checkbo" name="number" type="number" min="0" max="50" placeholder='Enter quantity' />
+                                </div>
+
+                                <div class="col-xs-12 col-sm-3">
+                                    <label>
+                                            <input type="checkbox" name="amount" class="voucher_checkbox" value="20000"  data-parsley-mincheck="1" data-parsley-group="block1" required="required" id="pack20000"/><h3>Voucher Pack 3</h3>
+                                            <span>20,000 FRW</span>   
+                                            
+                                        </label>
+                                    <input id="qtyof20000" class="checkbo" name="number" type="number" min="0" max="50" placeholder='Enter quantity' />
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-3">
+                                    <label>
+                                            <input type="checkbox" name="amount" class="voucher_checkbox" value="50000" data-parsley-mincheck="1" data-parsley-group="block1" required="required" id="pack50000"/><h3>Voucher Pack 4</h3>
+                                            <span>50,000 FRW</span>                                                        
+                                        </label>
+                                    <input id="qtyof50000" class="checkbo" name="number" type="number" min="0" max="50" placeholder='Enter quantity' />
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </fieldset>
+
+
+                    <fieldset>
+                        <legend>Summary &amp; Generate</legend>
+                        <div class="col-xs-12">
+
+                            <section class="packssummary row">
+
+                                <div class="col-xs-12 col-sm-3"><label>
+                                            Vouchers to generate on
+                                            <h3>Voucher Package  of <strong>5,000 FRW</strong></h3>
+                                            <h2 id='show5000'></h2>
+                                        </label></div>
+
+                                <div class="col-xs-12 col-sm-3"><label>
+                                            Vouchers to generate on
+                                            <h3>Voucher Package  of <strong>10,000 FRW</strong></h3>
+                                            <h2 id='show10000'></h2>
+                                        </label></div>
+
+                                <div class="col-xs-12 col-sm-3"><label>
+                                            Vouchers to generate on
+                                            <h3>Voucher Package  of <strong>20,000 FRW</strong></h3>
+                                            <h2 id='show20000'></h2>
+                                        </label></div>
+
+                                <div class="col-xs-12 col-sm-3" disavled="disabled"><label>
+                                            Vouchers to generate on
+                                            <h3>Voucher Package  of <strong>50,000 FRW</strong></h3>
+                                            <h2 id='show50000'></h2>
+                                        </label></div>
+
+                            </section>
+
+                        </div>
+                        <button type="submit" class="finish-btn sf-right sf-btn generatevoucher" id="generate">GENERATE NOW !</button>
+                    </fieldset>
+
+                </form>
+                <!-- -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End PopupGenerateVouchers  -->

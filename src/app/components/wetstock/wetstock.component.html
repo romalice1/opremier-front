@@ -1,3 +1,100 @@
-<p>
-  wetstock works!
-</p>
+<div class="row">
+    <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Week</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Month</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Quarter</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
+    </div>
+</div>
+
+<!-- TOP TILES -->
+<div class="row top_tiles">
+
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <h3>Volume Loss</h3>
+            <div class="count text-center">000,000 L</div>
+            <p><span class="count_bottom">TOP <span class="blue">Branche Name</span> > <span class="green">00,000 L</span></span>
+            </p>
+        </div>
+    </div>
+
+
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <h3>Suspected Leaks</h3>
+            <div class="count text-center">000</div>
+            <p><span class="count_bottom">TOP <span class="blue">Branche Name</span> > <span class="green">unreported 000 L</span></span>
+        </div>
+    </div>
+
+
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <h3>Branches to watch</h3>
+            <div class="count text-center">00</div>
+            <p><span class="count_bottom">TOP <span class="blue">Branche Name</span> > <span class="green">000 issues</span></span>
+        </div>
+    </div>
+
+
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <h3>Quantity Delivered</h3>
+            <div class="count text-center">000,000 L</div>
+            <p><span class="count_bottom">TOP <span class="blue">Branche Name</span> > <span class="green">00,000 L</span></span>
+        </div>
+    </div>
+</div>
+<!-- End TOP TILES -->
+
+<!-- INNER TILES -->
+<div class="row">
+
+    <!-- CHART -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile">
+            <div class="x_title">
+                <h2>Loss Analysis</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div [chart]="lossAnalysisChart" style="height: 330px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+    <!-- CHART -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile">
+            <div class="x_title">
+                <h2>Book Stocks</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div [chart]="bookStockChart" style="height: 330px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+
+</div>
+<!-- End INNER TILES -->

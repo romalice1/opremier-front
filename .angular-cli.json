@@ -58,7 +58,10 @@
           "assets/vendors/jszip/dist/jszip.min.js",
           "assets/vendors/pdfmake/build/pdfmake.min.js",
           "assets/vendors/pdfmake/build/vfs_fonts.js",
-          "assets/build/js/o_name.js"
+          "assets/vendors/jquery-sparkline/dist/jquery.sparkline.min.js",
+          "assets/vendors/tanks/config_tanks.js",
+          "assets/build/js/o_name.js",
+          "assets/build/js/o_vouchers.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

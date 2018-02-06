@@ -49,9 +49,9 @@
                             <td>+250 780 000 000</td>
                             <td>20</td>
                             <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="preview_branch_dashboard.xhtml" target="_blank"><i class="fa fa-eye"></i></a>
-                                <a class="action_icon ico_edit" href="#" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+                                <a class="action_icon ico_view" target="_blank"><i class="fa fa-eye"></i></a>
+                                <a class="action_icon ico_edit" (click)="updateBranch()" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" (click)="removeBranch()" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
                             </td>
                         </tr>
 
@@ -155,7 +155,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" (click)="addBranch()" class="btn btn-primary">Submit</button>
                 </div>
 
             </form>

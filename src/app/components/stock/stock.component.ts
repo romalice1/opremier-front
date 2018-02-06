@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-stock',
@@ -8,10 +9,25 @@ import { Chart } from 'angular-highcharts';
 })
 export class StockComponent implements OnInit {
 
-  constructor() { }
+  productsData = {}; // This obect will contain an array of products
+  salesData = {}; 
 
-  ngOnInit() {
-  }
+  constructor(
+      private http: HttpClient,
+      ) { }
+
+  //URL to transaction history
+  salesURL = " http://41.74.172.131:8088/oltranz/services/wallet/transactions/vendor/1/paymentmethods/start/0/end/0";
+  stockURL = "http://41.74.172.131:8110/oltranz/services/product/vendor_stock_products";
+
+    ngOnInit() {
+
+        this.http.get( this.stockURL ).subscribe(
+            res => {
+                console.log(res);
+                this.productsData = res;
+            });
+    }
 
   /*Transaction summary chart*/
   transSummaryChart = new Chart({
@@ -64,13 +80,15 @@ export class StockComponent implements OnInit {
             shared: true
         },
         
+        
         series: [{
             name: 'Super',
 			color: '#057ac0',
 			// borderRadius: '4',
             data: [2141, 2547, 3212, 3554, 3850, 3776, 4007, 4352, 3914, 3910, 3301, 4050, 4700, 2803, 2915, 3116, 0, 0, 0, 0, 0, 0, 0, 0]
 
-        },{
+        },
+        {
             name: 'Gasoil',
             color: '#d9d928',
 			// borderRadius: '4',
@@ -343,199 +361,9 @@ export class StockComponent implements OnInit {
 
     });
     /* END TANKS 1 GAUGE */
-
-
-    /* TANKS 2 GAUGE *
-    tank2Chart = new Chart({
-        chart: {
-            type: 'gauge',
-            plotBackgroundColor: null,
-            plotBackgroundImage: null,
-            plotBorderWidth: 0,
-            plotShadow: false,
-            backgroundColor: null
-        },
-
-
-        title: {
-            text: ''
-        },
-
-
-        tooltip: {
-            enabled: false
-        },
-
-
-        pane: {
-            center: ['50%', '85%'],
-            size: '140%',
-            startAngle: -90,
-            endAngle: 90,
-            background: {
-                backgroundColor: '#ffffff',
-                borderWidth: 0,
-                outerRadius: '100%',
-                innerRadius: '30%',
-                shape: 'arc'
-            }
-        },
-
-        yAxis: {
-            min: 0,
-            max: 15000,
-            minorTickInterval: 'auto',
-            minorTickWidth: 1,
-            minorTickLength: 3,
-            minorTickPosition: 'outside',
-            minorTickColor: '#666',
-            tickPixelInterval: 45,
-            tickWidth: 2,
-            tickPosition: 'outside',
-            tickLength: 5,
-            tickColor: '#c0c0c0',
-            labels: {
-                step: 2,
-                rotation: 'auto'
-            },
-            title: {
-                text: 'PMS2',
-                y: -100
-            },
-            plotBands: [{
-                from: 7500,
-                to: 15000,
-                color: '#55BF3B' //green
-            }, {
-                from: 3000,
-                to: 7500,
-                color: '#DDDF0D' //yellow
-            }, {
-                from: 0,
-                to: 3000,
-                color: '#DF5353' //red
-            }]
-        },
-
-        plotOptions: {
-            gauge: {
-                dataLabels: {
-                    y: 37,
-                    borderWidth: 0,
-                    useHTML: true,
-                    format: '{point.y} Liters',
-                    color: '{point.color}'
-
-                }
-            }
-        },
-
-        series: [{
-            name: 'Quantity',
-            data: [5000],
-            y: 70
-        }]
-
-
-
-    });
-    /* END TANKS 2 GAUGE */
-
-    /* TANKS 3 GAUGE *
-    tank3Chart = new Chart({
-        chart: {
-            type: 'gauge',
-            plotBackgroundColor: null,
-            plotBackgroundImage: null,
-            plotBorderWidth: 0,
-            plotShadow: false,
-            backgroundColor: null
-        },
-
-
-        title: {
-            text: ''
-        },
-
-
-        tooltip: {
-            enabled: false
-        },
-
-
-        pane: {
-            center: ['50%', '85%'],
-            size: '140%',
-            startAngle: -90,
-            endAngle: 90,
-            background: {
-                backgroundColor: '#ffffff',
-                borderWidth: 0,
-                outerRadius: '100%',
-                innerRadius: '30%',
-                shape: 'arc'
-            }
-        },
-
-        yAxis: {
-            min: 0,
-            max: 11000,
-            minorTickInterval: 'auto',
-            minorTickWidth: 1,
-            minorTickLength: 3,
-            minorTickPosition: 'outside',
-            minorTickColor: '#666',
-            tickPixelInterval: 45,
-            tickWidth: 2,
-            tickPosition: 'outside',
-            tickLength: 5,
-            tickColor: '#c0c0c0',
-            labels: {
-                step: 2,
-                rotation: 'auto'
-            },
-            title: {
-                text: 'AGO1',
-                y: -100
-            },
-            plotBands: [{
-                from: 5500,
-                to: 11000,
-                color: '#55BF3B' //green
-            }, {
-                from: 3000,
-                to: 5500,
-                color: '#DDDF0D' //yellow
-            }, {
-                from: 0,
-                to: 3000,
-                color: '#DF5353' //red
-            }]
-        },
-
-        plotOptions: {
-            gauge: {
-                dataLabels: {
-                    y: 37,
-                    borderWidth: 0,
-                    useHTML: true,
-                    format: '{point.y} Liters',
-                    color: '{point.color}'
-
-                }
-            }
-        },
-
-        series: [{
-            name: 'Quantity',
-            data: [1000],
-            y: 70
-        }]
-
-    });
-    */
-    /* END TANKS 3 GAUGE */
 /* END Individual Tanks Capacity */
 
+
+   
 
 }

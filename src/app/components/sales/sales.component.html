@@ -1,3 +1,83 @@
-<p>
-  sales works!
-</p>
+<div class="row">
+    <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Week</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Month</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Quarter</button>
+        <button type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
+    </div>
+</div>
+
+<!-- TOP TILES -->
+<div class="row top_tiles">
+
+    <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-money"></i></div>
+            <div class="count">00,000,000 FRW</div>
+            <h3>Amount</h3>
+            <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 3% </i> From last Week</span></p>
+        </div>
+    </div>
+
+    <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-list"></i></div>
+            <div class="count">000,000</div>
+            <h3>Transactions</h3>
+            <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 15% </i> From last Week</span></p>
+        </div>
+    </div>
+
+</div>
+<!-- End TOP TILES -->
+
+<!-- INNER TILES -->
+<div class="row">
+
+    <!-- CHART -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile">
+            <div class="x_title">
+                <h2>Transaction vs Amount</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div [chart]="transactionVsAmmountChart" style="height: 300px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+    <!-- CHART -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel tile">
+            <div class="x_title">
+                <h2>Sales per Payments Methods</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div [chart]="salesPerPaymentMethodChart" style="height: 370px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End CHART -->
+
+
+</div>
+<!-- End INNER TILES -->

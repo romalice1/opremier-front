@@ -8,26 +8,28 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class MyHttpInterceptor implements HttpInterceptor {
-constructor(private cookieService: CookieService) { }
 
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	constructor(private cookieService: CookieService) { }
 
-console.log("intercepted request ... ");
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
-// Clone the request to add the new header.
-const authReq = req.clone({ headers: req.headers.set("access_token", this.cookieService.get("opremier-token"))});
+		// Clone the request to add the new header.
+		const newRequest = req.clone({
+			headers: req.headers.set("Authorization", "Bearer "+this.cookieService.get("opremier-token") )
+		});
 
-console.log("Sending request with new header now ...");
+		console.log("Sending request with new header now ...");
 
-//send the newly created request
-return next.handle(authReq)
-.catch((error, caught) => {
-//intercept the respons error and displace it to the console
-console.log("Error Occurred");
-console.log(error);
-//return the error to the method that called it
-return Observable.throw(error);
-}) as any;
-}
+		// //send the newly created request
+		return next.handle(newRequest);
+		// 	.catch((error, caught) => {
+		// 	//intercept the respons error and displace it to the console
+		// 	console.log("Error Occurred");
+		// 	console.log(error);
+			
+		// 	//return the error to the method that called it
+		// 	return Observable.throw(error);
+		// }) as any;
+	}
 }

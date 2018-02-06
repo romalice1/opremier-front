@@ -1,3 +1,194 @@
-<p>
-  products works!
-</p>
+ Add price trends + Changes History
+<!-- TOP TILES -->
+<div class="row top_tiles">
+
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="tile-stats text-center">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <h3>Super</h3>
+            <div class="count">1,022 <small>FRW / L</small></div>
+            <p>
+                <span class="sparkline22 graph" style="height: 160px;">
+                <canvas width="100%" height="60" style="display: inline-block; vertical-align: top;"></canvas>
+            </span>
+                <br>Price trend from last 6 months
+            </p>
+        </div>
+    </div>
+
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="tile-stats text-center">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <h3>Gasoil</h3>
+            <div class="count">958 <small>FRW / L</small></div>
+            <p>
+                <span class="sparkline22 graph" style="height: 160px;">
+                    <canvas width="100%" height="60" style="display: inline-block; vertical-align: top;"></canvas>
+                </span>
+                <br>Price trend from last 6 months
+            </p>
+        </div>
+    </div>
+
+    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="tile-stats text-center">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <h3>Kerosene</h3>
+            <div class="count">860 <small>FRW / L</small></div>
+            <p>
+                <span class="sparkline22 graph" style="height: 160px;">
+                        <canvas width="100%" height="60" style="display: inline-block; vertical-align: top;"></canvas>
+                    </span>
+                <br>Price trend from last 6 months
+            </p>
+        </div>
+    </div>
+
+</div>
+<!-- End TOP TILES -->
+
+
+<!-- INNER TILES -->
+<div class="row">
+    <!-- -->
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Products List</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <button class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target=".bs-example-modal-form">ADD A PRODUCT</button>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+
+                <table id="datatable-buttons" class="table table-striped table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Type</th>
+                            <th>Price</th>
+                            <th>Last Price change</th>
+                            <th>Last Price change by</th>
+                            <th style="text-align:center;">Action</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+                            <td>Super</td>
+                            <td>Fuel</td>
+                            <td>1,022 FRW</td>
+                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
+                            <td>Username</td>
+                            <td style="text-align:center;">
+                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-eye"></i></a>
+                                <a class="action_icon ico_edit" (click)="updateProduct()"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" (click)="removeProduct()" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Gasoil</td>
+                            <td>Fuel</td>
+                            <td>958 FRW</td>
+                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
+                            <td>Username</td>
+                            <td style="text-align:center;">
+                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-eye"></i></a>
+                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Kerosene</td>
+                            <td>Fuel</td>
+                            <td>860 FRW</td>
+                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
+                            <td>Username</td>
+                            <td style="text-align:center;">
+                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-eye"></i></a>
+                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <!-- -->
+
+
+
+</div>
+<!-- End INNER TILES -->
+
+
+<!-- Modal_FORM -->
+<div class="modal fade bs-example-modal-form" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <form class="form-horizontal form-label-left input_mask">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                      </button>
+                    <h4 class="modal-title" id="myModalLabel">Add a product</h4>
+                </div>
+
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Name</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Enter a prodcut name">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Category</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <select class="form-control">
+                                 <option>Fuel</option>
+                                <option>Type 2</option>
+                                <option>Type 3</option>
+                                <option>Type 4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Product Price</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Enter prince in FRW">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button (click)="addProduct()" type="button" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal_FORM -->

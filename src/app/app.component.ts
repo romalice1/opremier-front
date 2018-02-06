@@ -14,10 +14,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent {
   	title = 'Welcome to O-premier';
 
-
 	constructor( private cookieService: CookieService ) { }
-
-	//Extract session from cookie
-  	session = this.cookieService.get("opremier-session") ;
 
 }

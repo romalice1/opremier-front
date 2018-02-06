@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -12,33 +10,55 @@ import { UserService } from '../services/user.service';
 export class NavComponent implements OnInit { 
 
 	constructor( 
-		private cookieService: CookieService,
 		private user: UserService,
 		private router: Router
 		) { }
-  	
+
+	session = this.user.getUserSession();
+	isLoggedIn = this.user.getUserLoggedIn();
 
 	ngOnInit() {
-		//Check if session exists
-		if( this.cookieService.check("opremier-session") ){
-			//Session cookie in JSON
-			var session = this.cookieService.get("opremier-session");
-			//Parse session data to object
-			// var sessionDataObj = JSON.parse(session);
-			console.log( "Cookie: " + session );
-		}else{
-			console.log("Missing cookie");
+		//Redirect user if session not set
+		if ( this.user.getUserLoggedIn() === false ){
+			this.router.navigate(['/login']);
 		}
   	}
 
   	/*Logout*/
   	userLogout(){
-  		//Destroy the cookie
-  		this.cookieService.delete("opremier-session");
-  		//Redirect user to login
-  		if( !this.cookieService.check('opremier-session') ){
-	  		this.router.navigate(['/login']);
-	  	}  		
+  		if( this.user.destroyUserSession() ){
+  			this.router.navigate(['/login']);
+  		}
   	}
+
+
+  	/*
+  	private menuItemsArray: any[] = [ 
+       {"title":"Electricity","link":"#"},
+       {"title":"Mobile Bill","link":"#"},
+       {"title":"Home and Kitchen","link":"#",
+       "subItems":[
+                   {"title":"Furniture","link":"#"},
+                   {"title":"Cookware","link":"#"},
+                  ]
+       },
+       {"title":"Car and Bike Accessories","link":"#",
+        "subItems":[
+                     {"title":"Tyres and Alloys","link":"#"},
+                     {"title":"Comfort and Safety","link":"#"},
+                    ]
+       },
+ 	];
+ 
+	public onMenuClose(){
+		console.log("menu closed");
+	}
+	public onMenuOpen(){
+		console.log("menu Opened");
+	}
+	private onItemSelect(item:any){
+		console.log(item);
+	}
+	*/
 
 }
