@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
 	cookieValue = {}; // cookie to hold session data
 	private webAPI = "http://41.74.172.131:8084/oltranz/services/usermanagement/users/email";
-
+  private orgWebApi = "http://41.74.172.131:8093/oltranz/services/organizations/organization_user/user/";
   username:string;
   password:string;
   alert: string; // alert if login fails
@@ -58,16 +58,26 @@ export class LoginComponent implements OnInit {
   						//2. Get user details for session tracking (full name, id)
   						this.http.get( this.webAPI+"?p="+this.username+"&access_token=" +this.authService.AccessToken).subscribe(
   							res => {
-                  console.log(res);
-		  						//1. Create session cookie
-		  						this.user.setUserSessionCookie(
-                    res.json().id,
-                    this.authService.AccessToken, 
-                    this.username,
-                    res.json().firstName,
-                    res.json().lastName);
+                  // Get organization user belongs to
+                  this.http.get( this.orgWebApi+res.json().id ).subscribe(
+                    org=>{
 
-                  this.router.navigate(['/stock']);
+                    //Make sure the response has data
+                    if(org.json().length != 0){
+                      //1. Create session cookie
+                      this.user.setUserSessionCookie(
+                        res.json().id,
+                        this.authService.AccessToken, 
+                        this.username,
+                        res.json().firstName,
+                        res.json().lastName,
+                        org.json()[0].organization.id
+                        );
+
+                      this.router.navigate(['/stock']);
+                    }
+
+                  });
 						   });
   					}
 

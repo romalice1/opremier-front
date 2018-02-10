@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { HttpClient } from '@angular/common/http';
+import { Headers, Http, HttpModule } from '@angular/http';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -10,21 +10,143 @@ import { UserService } from '../../services/user.service';
 })
 export class VoucherDashComponent implements OnInit {
 
-  constructor(
-      private http: HttpClient,
-      private user: UserService) { }
+    constructor
+    (
+      private http: Http,
+      private user: UserService
+    ) { }
 
   // Voucher API/merchant_id
   voucherDashAPI = "http://41.74.172.131:8089/oltranz/services/vouchers/topups/merchant/";
 
-  ngOnInit() {
-      //Get usage, customer, and balance data
-      this.http.get(this.voucherDashAPI).subscribe(res=>{
+  voucherStats:any; 
+  customers:any;
+  error:any; //Notification for success
+  success:any; //Notification for error
+  html: HTMLDocument;
+  
+  merchant_id = this.user.getUserSession().organization;
+  user_id = this.user.getUserSession().id;
 
-      });
-  }
+    ngOnInit() {
+        //Get voucher statistics
+        this.http.get( this.voucherDashAPI + this.merchant_id ).subscribe(
+            res=>{
+                console.log("Voucher stats: "+res);
+                this.voucherStats = res;
+                
+                //get customers
+                var url="http://41.74.172.131:8093/oltranz/services/organizations/organization_relationships/parent/"+this.user.getUserSession().organization+"/relationship?name=CUSTOMER";
+                this.http.get(url).subscribe( res => {
+                    this.customers = res.json();
+                });
+            });
+     }
+
+    /*Add fund to customer*/
+    addFund(e){
+        e.preventDefault(); 
+
+        var api = "http://41.74.172.131:8089/oltranz/services/vouchers/vouchers/topup"
+        var customerId = e.target.elements[1].value;
+        var fundAmount = e.target.elements[2].value;
+        var payload={
+          amount: fundAmount,
+          customerId: customerId,
+          merchantId: this.merchant_id,
+          userId: this.user_id
+        }
+        this.http.post(api, payload).subscribe(res=>{
+            //Feedback to the user
+            if( res.ok ){
+                this.success = "Customer's wallet has been toped up successfully!";
+                this.error = null;
+            }else{
+                this.error = "There was an error! Please try again.";
+                this.success=null;
+            }
+        });
+    }
+
+    // Verify if voucher packs are properly checked
+    checkPacks(pack, quantity, packArray:any[]){
+        if( pack.checked ){
+            if(quantity==""){
+                this.error = "The quantity for Pack "+pack.value+" RWF can't be empty";
+                this.success=null;
+            }else{
+                this.error=false;
+                packArray.push({
+                   amount: pack.value,
+                   quantity: quantity 
+               });
+            }
+        }
+    }
+
+    /* Generate voucher */
+    generateVoucher(e){
+        e.preventDefault();
+        let api = "http://41.74.172.131:8089/oltranz/services/vouchers/vouchers/generate"
+
+        let packs =[];
+
+        let customerId = e.target.elements[0].value;
+
+        let voucher5 = e.target.elements[2];
+        let qtyfor5 =  e.target.elements[3].value;
+        let voucher10 = e.target.elements[4];
+        let qtyfor10 =  e.target.elements[5].value;
+        let voucher20 = e.target.elements[6];
+        let qtyfor20 =  e.target.elements[7].value;
+        let voucher50 = e.target.elements[8];
+        let qtyfor50 =  e.target.elements[9].value;
+
+        /** CHECK PACKS **/
+        // Check voucher 5000
+        this.checkPacks(voucher5, qtyfor5, packs);
+        this.checkPacks(voucher10, qtyfor10, packs);
+        this.checkPacks(voucher20, qtyfor10, packs);
+        this.checkPacks(voucher50, qtyfor50, packs);
+        /** END CHECK PACKS **/
+
+        /** SEND REQUEST **/
+        let payload = {
+            customerId: customerId,
+            merchantId: this.merchant_id,
+            packs: packs,
+            userId: this.user_id
+        }
+        
+        this.http.post(api, payload).subscribe(resp=>{
+            if( resp.json().code==200 ){
+                this.success = resp.json().description+"Balance: "+resp.json().body.balance+" RWF";
+                this.error=false;
+            }else{
+                this.error = resp.json().description;
+                this.success = false;
+            }
+        });
+        /** DONE SEND REQUEST **/
+    }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /****CHARTS*****/
   /* VouchersUsage */
     voucherUsageChart = new Chart({
         chart: {
@@ -68,8 +190,16 @@ export class VoucherDashComponent implements OnInit {
                     enabled: false
                 },
                 data: [
-                    {name: 'Available', color: '#2db032', y: 80},
-                    {name: 'Redeemed', color: '#b9b9b9', y: 20}
+                    {
+                        name: 'Available', 
+                        color: '#2db032', 
+                        y: 80 /*this.voucherStats.vouchers.available*/
+                    },
+                    {
+                        name: 'Redeemed', 
+                        color: '#b9b9b9', 
+                        y: 20 /*this.voucherStats.vouchers.redeemed*/
+                    }
 
                 ]
             }],

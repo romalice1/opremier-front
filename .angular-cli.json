@@ -61,7 +61,8 @@
           "assets/vendors/jquery-sparkline/dist/jquery.sparkline.min.js",
           "assets/vendors/tanks/config_tanks.js",
           "assets/build/js/o_name.js",
-          "assets/build/js/o_vouchers.js"
+          "assets/build/js/o_vouchers.js",
+          "assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -200,7 +200,7 @@ div.box_quantities:last-child {
     font-size: 48px;
     font-weight: bold;
     text-align: center;
-    background: url(/assets/images/bg_qty.png) no-repeat center right;
+    /*background: url(../images/bg_qty.png) no-repeat center right;*/
     background-size: auto 50px;
     background-color: #e9e9e9;
     border-radius: 4px 4px 0px 0px;
@@ -443,7 +443,7 @@ table.dataTable strong.v_redeemed:before {
     body {
         background-color: #ffffff;
         height: 100%;
-        background-image: url(/assets/images/mainlogo.png);
+        /*background-image: url(../../assets/images/mainlogo.png);*/
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -567,7 +567,7 @@ section.packs label h3 {
 
 section.packs label span {
     display: block;
-    font-size: 41px;
+    font-size: 30px;
     margin: 25px;
     color: #000000;
 }
@@ -593,6 +593,7 @@ section.packs div {
 
 section.packs input[type="number"] {
     display: inline-block;
+    /*display: none;*/
     position: relative;
     font-size: 20px;
     border: 1px solid #ffffff;
@@ -686,6 +687,9 @@ section.packssummary label span {
         text-align: center;
         border: 2px solid #dedede;
         height: 100px;
+    }
+    section.packs label :hover{
+        background:#448899;
     }
 
     section.packs label h3 {

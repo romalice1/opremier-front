@@ -17,7 +17,8 @@ export class UserService {
     token:"",
     email:"",
     name:"",
-    nickName:""
+    nickName:"",
+    organization:""
   };
 
   constructor( private cookieService: CookieService ) { 
@@ -48,12 +49,13 @@ export class UserService {
   	}
   }
 
-  setUserSessionCookie(id, token, email, firstName, lastName){
+  setUserSessionCookie(id, token, email, firstName, lastName, org){
     this.cookieService.set('o-userId', id);
     this.cookieService.set('o-token', token);
     this.cookieService.set('o-email',email);
     this.cookieService.set('o-name', firstName+" "+lastName);
     this.cookieService.set('o-nickName', firstName);
+    this.cookieService.set('o-organization', org);
   }
 
   destroyUserSession(){
@@ -62,6 +64,7 @@ export class UserService {
     this.cookieService.delete('o-email');
     this.cookieService.delete('o-name');
     this.cookieService.delete('o-nickName');
+    this.cookieService.delete('o-organization');
 
     if( this.cookieService.check('o-token')){
       return false;
@@ -86,6 +89,7 @@ export class UserService {
       this.session.email = this.cookieService.get('o-email');
       this.session.name = this.cookieService.get('o-name');
       this.session.nickName = this.cookieService.get('o-nickName');
+      this.session.organization = this.cookieService.get('o-organization');
 
       return this.session;
     }else{
