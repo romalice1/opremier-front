@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+
+declare var $:any;
 
 @Component({
   selector: 'app-nav',
@@ -9,27 +12,47 @@ import { UserService } from '../services/user.service';
 })
 export class NavComponent implements OnInit { 
 
+	route
+
 	constructor( 
 		private user: UserService,
-		private router: Router
-		) { }
+		private router: Router,
+		private location: Location
+		) { 
+		//track router
+		router.events.subscribe((val)=>{
+			if(location.path() == '/stock'){
+				//Check if session is on
+				if( this.user.getUserLoggedIn() ){
+		        	this.isLoggedIn = true;
+				}
+		    }
+		});
+	}
 
-	session = this.user.getUserSession();
-	isLoggedIn = this.user.getUserLoggedIn();
+	session;
+	isLoggedIn;
+
 
 	ngOnInit() {
 		//Redirect user if session not set
 		if ( this.user.getUserLoggedIn() === false ){
 			this.router.navigate(['/login']);
 		}
+
+    this.isLoggedIn = this.user.getUserLoggedIn();
+    this.session = this.user.getUserSession();
   	}
 
-  	/*Logout*/
-  	userLogout(){
-  		if( this.user.destroyUserSession() ){
-  			this.router.navigate(['/login']);
-  		}
-  	}
+	/*Logout*/
+	userLogout(){
+		if( this.user.destroyUserSession() ){
+			this.isLoggedIn = false;
+			this.router.navigate(['/login']);
+			
+		}
+	}
+
 
 
   	/*

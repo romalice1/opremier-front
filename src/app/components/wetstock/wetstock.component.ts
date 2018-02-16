@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../services/user.service';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-wetstock',
@@ -12,15 +14,17 @@ export class WetstockComponent implements OnInit {
     transactionData={};
 
   constructor(
-      private http: HttpClient) { }
+      private http: HttpClient,
+      private api: ApiService,
+      private user: UserService) { }
 
     //URL builder
-    getSalesUrl(ids, startDate, endDate){
-        return "/oltranz/services/wallet/transactions/vendor/"+ids+"/paymentmethods/start/"+startDate+"/end/"+endDate;
+    getTransUrl(vendorId, startDate, endDate){
+        return this.api.WALLET+"/transactions/vendor/"+vendorId+"?start="+startDate+"&end="+endDate;
     }
 
     ngOnInit() {
-        this.http.get( this.getSalesUrl("1","000-00-00","000-00-00") ).subscribe(
+        this.http.get( this.getTransUrl(this.user.getUserSession().organization,"00/00/000","00/00/000") ).subscribe(
             res => {
                 console.log(res);
                 this.transactionData = res;

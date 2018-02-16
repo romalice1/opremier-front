@@ -24,6 +24,8 @@
     "angular-gauge": "^3.1.0",
     "angular-highcharts": "^4.1.0",
     "angular2-next-wizard": "0.0.5",
+    "angular5-data-table": "^0.5.1",
+    "chart.js": "^2.7.1",
     "core-js": "^2.4.1",
     "highcharts": "^6.0.4",
     "ng-gentelella": "^0.2.6",

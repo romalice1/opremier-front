@@ -15,7 +15,7 @@
         <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="tile-vouchers text-center">
                 <div class="icon"><i class="fa fa-money"></i></div>
-                <div class="count">00.00<!-- {{ voucherStats.totalTopups | 0 }} --> FRW</div>
+                <div class="count">{{totalTopup | currency: "RWF"}}</div>
                 <h3>Balance</h3>
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel tile">
                 <div class="x_title">
-                    <h2>Vouchers Usage</h2>
+                    <h2 routerLink="/vouchers-all" title="Show all vouchers" style='cursor:pointer;'>Vouchers Usage</h2>
                     <div class="clearfix"></div>
                 </div>
 
@@ -60,7 +60,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel tile">
                 <div class="x_title">
-                    <h2>Top 10 Customers</h2>
+                    <h2 routerLink="/vouchers-cust" title="Show all customers" style='cursor:pointer;' >Top 10 Customers</h2>
                     <div class="clearfix"></div>
                 </div>
 

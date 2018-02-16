@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ApiService} from '../../services/api/api.service';
+
+
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+	constructor(
+		private http: HttpClient,
+	    private api: ApiService
+	) { }
 
-  ngOnInit() {
-  }
+	data;
+	url = this.api.PRODUCT+"/vendor_stock_order";
+
+	ngOnInit() {
+		this.http.get( this.url ).subscribe(
+		res =>{
+			this.data = res;
+		});
+	}
 
 }

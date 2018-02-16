@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { TokenParams } from '../../classes/TokenParams';
 import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Headers, Http, HttpModule } from '@angular/http';
 import { UserService } from '../../services/user.service';
-
-// Import the interface
-// import { SessionParams } from '../../classes/session/SessionParams';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +14,8 @@ import { UserService } from '../../services/user.service';
 export class LoginComponent implements OnInit {
 
 	cookieValue = {}; // cookie to hold session data
-	private webAPI = "http://41.74.172.131:8084/oltranz/services/usermanagement/users/email";
-  private orgWebApi = "http://41.74.172.131:8093/oltranz/services/organizations/organization_user/user/";
+	private webAPI = this.api.USER_MANAGEMENT+"/users/email";
+  private orgWebApi = this.api.ORGANIZATION+"/organization_user/user/";
   username:string;
   password:string;
   alert: string; // alert if login fails
@@ -28,7 +25,8 @@ export class LoginComponent implements OnInit {
 	  	private authService: AuthService,
 	  	private cookieService: CookieService,
 	  	private http: Http,
-      private user: UserService
+      private user: UserService,
+      private api: ApiService
   	) { }
 
   ngOnInit() {

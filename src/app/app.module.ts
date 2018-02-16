@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { GaugeModule } from 'angular-gauge';
 import { SlideMenuModule } from 'cuppa-ng2-slidemenu/cuppa-ng2-slidemenu'; // For sidebar menu
+import { FormsModule } from '@angular/forms';
+// import {  } from 'angular5-data-table';
 
 import { ChartModule } from 'angular-highcharts';
 
@@ -12,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MyHttpInterceptor } from './services/MyHttp-interceptor';
 import { UserService } from './services/user.service';
 import { AuthguardGuard } from './services/authguard.guard';
+import { ApiService } from './services/api/api.service';
 
 import { AppComponent } from './app.component';
 import { StockComponent } from './components/stock/stock.component';
@@ -66,6 +69,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     SlideMenuModule,
     HttpModule,
     HttpClientModule,
+    FormsModule,
+    // DataTable,
     GaugeModule.forRoot()
   ],
   providers: [
@@ -73,6 +78,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     CookieService,  
     UserService,
     AuthguardGuard,
+    ApiService,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: MyHttpInterceptor, 

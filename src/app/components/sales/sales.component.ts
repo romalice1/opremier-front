@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-sales',
@@ -11,17 +12,18 @@ import { UserService } from '../../services/user.service';
 export class SalesComponent implements OnInit {
 
     transactionData={};
-    walletURl = "http://41.74.172.131:8088";
-    organizationURL = "http://41.74.172.131:8093/oltranz/services/organizations/organization_user/user/"
+    walletURl = this.api.WALLET;
+    organizationURL = this.api.ORGANIZATION+"/organization_user/user/"
     orgId;
 
 	constructor(
         private http: HttpClient,
-        private user: UserService) { }
+        private user: UserService,
+        private api: ApiService) { }
 
     //URL builder
     getSalesUrl(ids, startDate, endDate){
-        return this.walletURl+"/oltranz/services/wallet/transactions/vendor/"+ids+"/paymentmethods/start/"+startDate+"/end/"+endDate;
+        return this.walletURl+"/transactions/vendor/"+ids+"/paymentmethods/start/"+startDate+"/end/"+endDate;
     }
 
 	ngOnInit() {

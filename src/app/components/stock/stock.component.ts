@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-stock',
@@ -10,15 +11,19 @@ import { HttpClient } from '@angular/common/http';
 export class StockComponent implements OnInit {
 
   productsData = {}; // This obect will contain an array of products
+
+  products = {}
+
   salesData = {}; 
 
   constructor(
       private http: HttpClient,
+      private api: ApiService
       ) { }
 
   //URL to transaction history
-  salesURL = " http://41.74.172.131:8088/oltranz/services/wallet/transactions/vendor/1/paymentmethods/start/0/end/0";
-  stockURL = "http://41.74.172.131:8110/oltranz/services/product/vendor_stock_products";
+  salesURL = this.api.WALLET+"/transactions/vendor/1/paymentmethods/start/0/end/0";
+  stockURL = this.api.PRODUCT+"/vendor_stock_products";
 
     ngOnInit() {
 

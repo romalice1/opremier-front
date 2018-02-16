@@ -30,10 +30,10 @@
                     </thead>
 
 
-                    <tbody>
+                    <tbody *ngIf="branches">
 
-                        <tr>
-                            <td>Kimironko</td>
+                        <tr *ngFor = "let branch of branches">
+                            <td> {{ branch.childOrganization.name }} </td>
                             <td>3</td>
 
                             <td style="text-align:center;">
@@ -45,40 +45,18 @@
                             <td style="text-align:center;">
                                 <div class="pos_datatable">20 <br><span class="minichart_pos">15,5</span></div>
                             </td>
-                            <td>Name K</td>
-                            <td>+250 780 000 000</td>
+                            <td>{{ branch.childOrganization.contactPersonName }}</td>
+                            <td>
+                                <i class="glyphicon glyphicon-phone"></i> {{ branch.childOrganization.contactTelephone }} <br/>
+                                <span class="glyphicon glyphicon-envelope"></span> {{ branch.childOrganization.contactEmail }}
+                            </td>
                             <td>20</td>
                             <td style="text-align:center;">
                                 <a class="action_icon ico_view" target="_blank"><i class="fa fa-eye"></i></a>
-                                <a class="action_icon ico_edit" (click)="updateBranch()" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" (click)="removeBranch()" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+                                <a class="action_icon ico_edit" (click)="updateBranch( branch.childOrgnaization.id )" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
+                                <a class="action_icon ico_delete" (click)="removeBranch( branch.childOrgnaization.id )" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Gikondo</td>
-                            <td>3</td>
-
-                            <td style="text-align:center;">
-                                <div class="tanks_datatable"><span class="minichart_tanks">75,25</span> <label>PMS1 :</label> 00,000 L </div>
-                                <div class="tanks_datatable"><span class="minichart_tanks">90,10</span> <label>PMS2 :</label> 00,000 L</div>
-                                <div class="tanks_datatable"><span class="minichart_tanks">80,20</span> <label>AGO1 :</label> 00,000 L </div>
-                            </td>
-
-                            <td style="text-align:center;">
-                                <div class="pos_datatable">18 <br><span class="minichart_pos">18,2</span></div>
-                            </td>
-
-                            <td>Name G</td>
-                            <td>+250 780 000 000</td>
-                            <td>20</td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="preview_branch_dashboard.xhtml" target="_blank"><i class="fa fa-eye"></i></a>
-                                <a class="action_icon ico_edit" href="#" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                            </td>
-                        </tr>
-
 
 
                     </tbody>

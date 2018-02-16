@@ -79,45 +79,16 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>Super</td>
-                            <td>Fuel</td>
-                            <td>1,022 FRW</td>
+                        <tr *ngFor = "let product of products">
+                            <td>{{product.name}}</td>
+                            <td>{{product.category.name}}</td>
+                            <td>NULL FRW</td>
                             <td>DDD, dd/mm/yyyy at 00:00:00</td>
                             <td>Username</td>
                             <td style="text-align:center;">
                                 <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-eye"></i></a>
                                 <a class="action_icon ico_edit" (click)="updateProduct()"> <i class="fa fa-pencil"></i> </a>
                                 <a class="action_icon ico_delete" (click)="removeProduct()" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Gasoil</td>
-                            <td>Fuel</td>
-                            <td>958 FRW</td>
-                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
-                            <td>Username</td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-eye"></i></a>
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Kerosene</td>
-                            <td>Fuel</td>
-                            <td>860 FRW</td>
-                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
-                            <td>Username</td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-eye"></i></a>
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
 
                             </td>
                         </tr>

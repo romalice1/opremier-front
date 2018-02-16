@@ -1,6 +1,13 @@
-<!-- <cuppa-slidemenu [menulist]="menuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)"></cuppa-slidemenu> -->
+<!-- 
+<cuppa-slidemenu 
+  [menulist]="menuItemsArray" 
+  (open)="onMenuOpen()" 
+  (close)="onMenuClose()" 
+  (onItemSelect)="onItemSelect($event)">
+</cuppa-slidemenu>
 
-<div *ngIf="isLoggedIn" >
+ -->
+<div *ngIf="isLoggedIn" [(ngModel)]="isLoggedIn" >
 <div class="col-md-3 left_col">
 <div class="left_col scroll-view">
   <div class="navbar nav_title">
@@ -13,7 +20,7 @@
   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
       <div class="menu_section">
           <ul class="nav side-menu">
-              <li><a><i class="fa fa-home"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
+              <li><a id="pose"><i class="fa fa-home"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a routerLink="/stock">Stock</a></li>
                       <li><a routerLink="/sales">Sales</a></li>
@@ -36,13 +43,19 @@
 
               <li><a routerLink="/orders"><i class="fa fa-truck"></i> Orders</a></li>
 
-              <li><a><i class="fa fa-qrcode"></i>Vouchers<span class="fa fa-chevron-down"></span></a>
+              <!-- <li><a><i class="fa fa-qrcode"></i>Vouchers<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                       <li><a routerLink="/vouchers-dash">Dashboard</a></li>
                       <li><a routerLink="/vouchers-all">All Vouchers</a></li>
                       <li><a routerLink="/vouchers-cust">Customers</a></li>
                   </ul>
-              </li>
+              </li> -->
+
+              <li><a routerLink="/vouchers-dash"><i class="fa fa-qrcode"></i> Voucher Dashboard</a></li>
+
+              <li><a routerLink="/vouchers-all"><i class="fa fa-list"></i> Vouchers</a></li>
+
+              <li><a routerLink="/vouchers-cust"><i class="glyphicon glyphicon-user"></i> Customers</a></li>
 
               <li><a routerLink="/notifications"><i class="fa fa-bell"></i>Notifications</a></li>
 
@@ -80,7 +93,7 @@
           </div>
 
           <div class="nav navbar-nav navbar-main" style="border:0px solid red;">
-              <span class="welcome">Welcome <strong> {{ session.name }}</strong></span>
+              <span id="pose" class="welcome">Welcome <strong> {{ session.name }}</strong></span>
 
 
               <ul class="nav navbar-nav navbar-right" style="border:0px solid blue">
@@ -144,3 +157,11 @@
 </div>
 <!-- /top navigation -->
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#pose").click(function(){
+        document.write("LOve is here");
+    });
+  });
+</script>

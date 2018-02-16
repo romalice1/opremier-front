@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-declare var jquery:any;
-declare var $ :any;
-
-//Inject cookie to track session
-import { CookieService } from 'ngx-cookie-service';
-
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent {
   	title = 'Welcome to O-premier';
 
-	constructor( private cookieService: CookieService ) { }
+	constructor(private user: UserService) { }
+
+	isLoggedIn = this.user.getUserLoggedIn();
 
 }

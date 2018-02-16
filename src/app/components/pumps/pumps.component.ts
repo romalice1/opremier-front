@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-pumps',
@@ -8,18 +9,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PumpsComponent implements OnInit {
 
+	constructor( 
+		private http: HttpClient,
+		private api: ApiService 
+		) { }
+
 	data = {};
-  	baseUrl = "http://41.74.172.131:8093";
+  	baseUrl = this.api.EQUIPMENT;
 
 	//URL builder
 	getPumpsUrl(equipName){
-		return this.baseUrl+"/oltranz/services/equipment/equipment_types/name/"+equipName;
+		return this.baseUrl+"/equipment_types/name/"+equipName;
 	}
 
-	constructor( private http: HttpClient ) { }
-
 	ngOnInit() {
-		this.http.get( this.getPumpsUrl("1") ).subscribe(
+		this.http.get( this.getPumpsUrl("pump") ).subscribe(
   		res =>{
   			console.log(res);
   			this.data = res;

@@ -62,7 +62,8 @@
           "assets/vendors/tanks/config_tanks.js",
           "assets/build/js/o_name.js",
           "assets/build/js/o_vouchers.js",
-          "assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"
+          "assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js",
+          "./assets/build/js/o_name.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

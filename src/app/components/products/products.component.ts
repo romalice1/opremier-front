@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-products',
@@ -8,29 +9,31 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductsComponent implements OnInit {
 
-	data = {};
-	baseUrl = "http://41.74.172.131:8110";
+	constructor(
+		private http: HttpClient,
+		private api: ApiService) { }
+
+	products;
+	baseUrl = this.api.PRODUCT;
 
 	//URL builder
-	getUrl(parentId, relationshipId){
-		return this.baseUrl+"/oltranz/services/product/products";
+	getUrl(){
+		return this.baseUrl+"/products";
 	}
-
-	constructor(private http: HttpClient) { }
 
 	ngOnInit() {
 		// Get all products
-		this.http.get( this.getUrl("1","1") ).subscribe(
+		this.http.get( this.getUrl() ).subscribe(
 	  		res =>{
-	  			console.log(res);
-	  			this.data = res;
+	  			this.products = res;
 	  	});
 	}
 
 
 	//Update Product
 	updateProduct(childId, parentId, relationshipId){ // Faulty - check API doc
-		this.http.post( this.baseUrl+"/oltranz/services/organizations/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {}).subscribe(
+		this.http.post( this.baseUrl+"/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {})
+		.subscribe(
 			res =>{
 				console.log(res);
 		});
@@ -39,7 +42,8 @@ export class ProductsComponent implements OnInit {
 
 	//remove a Product
 	removeProduct(childId, parentId, relationshipId){ // Faulty - check APi doc
-		this.http.post( this.baseUrl+"/oltranz/services/organizations/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {}).subscribe(
+		this.http.post( this.baseUrl+"/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {})
+		.subscribe(
 			res =>{
 				console.log(res);
 		});
@@ -48,11 +52,30 @@ export class ProductsComponent implements OnInit {
 
 	//Add a Product
 	addProduct(childId, parentId, relationshipId){ // Faulty - check APi doc
-		this.http.post( this.baseUrl+"/oltranz/services/organizations/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {}).subscribe(
+		let payload = {
+			category: {
+				activitySector: {
+				  	id: 0,
+				  	isActive: true,
+				  	name: "string"
+				},
+				description: "string",
+				id: 0,
+				name: "string",
+				parentCategory: {}
+			},
+			description: "string",
+			id: "string",
+			isActive: true,
+			name: "string",
+			recordDate: "yyyy-MM-dd HH:mm:ss"
+		}
+
+		this.http.post( this.baseUrl+"/products",{})
+		.subscribe(
 			res =>{
 				console.log(res);
 		});
-		console.log("Product addition clicked");
 	}
 
 

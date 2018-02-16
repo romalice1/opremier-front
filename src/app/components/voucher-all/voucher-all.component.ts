@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Headers, Http, HttpModule } from '@angular/http';
+import { UserService } from '../../services/user.service';
+import { ApiService} from '../../services/api/api.service';
 
 @Component({
   selector: 'app-voucher-all',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VoucherAllComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  	private user: UserService,
+  	private api: ApiService,
+  	private http: Http
+  	) { }
+
+  vouchers:any[];
 
   ngOnInit() {
+  	//get all vouchers
+  	this.http.get(this.api.VOUCHERS+"/vouchers/merchant/"+this.user.getUserSession().organization)
+  	.subscribe(res=>{
+  		this.vouchers = res.json().body;
+  	});
   }
+
+  // show voucher image
 
 }

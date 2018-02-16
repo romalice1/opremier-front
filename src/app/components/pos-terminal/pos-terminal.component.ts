@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ApiService} from '../../services/api/api.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-pos-terminal',
@@ -8,18 +10,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PosTerminalComponent implements OnInit {
 
-	data = {};
-  	baseUrl = "http://41.74.172.131:8093";
+	data;
 
+	constructor( 
+		private http: HttpClient,
+		private api: ApiService,
+		private user: UserService
+	 ) { }
+	baseUrl = this.api.EQUIPMENT;
+	
 	//URL builder
-	getPOSUrl(equipName){
-		return this.baseUrl+"/oltranz/services/equipment/equipment_types/name/"+equipName;
+	getPOSUrl(vendorId){
+		return this.baseUrl+"/pos/owner/"+vendorId;
 	}
 
-	constructor( private http: HttpClient ) { }
-
 	ngOnInit() {
-		this.http.get( this.getPOSUrl("1") ).subscribe(
+		this.http.get( this.getPOSUrl( this.user.getUserSession().organization ) ).subscribe(
   		res =>{
   			console.log(res);
   			this.data = res;
@@ -46,11 +52,14 @@ export class PosTerminalComponent implements OnInit {
 	}
 
 	//Add a POS
-	addPOS(childId, parentId, relationshipId){ // Faulty - check APi doc
-		this.http.post( this.baseUrl+"/oltranz/services/equipment/equipments", {}).subscribe(
-			res =>{
-				console.log(res);
-		});
+	addPOS(e){ // Faulty - check APi doc
+		e.preventDefault();
+		let pos_name = e.target.elements[1].value
+
+		// this.http.post( this.baseUrl+"/oltranz/services/equipment/equipments", {}).subscribe(
+		// 	res =>{
+		// 		console.log(res);
+		// });
 		console.log("POS addition clicked");
 	}
 
