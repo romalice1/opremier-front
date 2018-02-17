@@ -4,6 +4,7 @@ import { GaugeModule } from 'angular-gauge';
 import { SlideMenuModule } from 'cuppa-ng2-slidemenu/cuppa-ng2-slidemenu'; // For sidebar menu
 import { FormsModule } from '@angular/forms';
 // import {  } from 'angular5-data-table';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { ChartModule } from 'angular-highcharts';
 
@@ -71,7 +72,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     HttpClientModule,
     FormsModule,
     // DataTable,
-    GaugeModule.forRoot()
+    GaugeModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [
     AuthService, 

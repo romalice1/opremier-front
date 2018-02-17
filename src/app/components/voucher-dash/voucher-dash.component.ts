@@ -4,6 +4,7 @@ import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { ApiService} from '../../services/api/api.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-voucher-dash',
@@ -16,7 +17,8 @@ export class VoucherDashComponent implements OnInit {
     (
         private http: HttpClient,
         private user: UserService,
-        private api: ApiService
+        private api: ApiService,
+        protected spinner: Ng4LoadingSpinnerService
     ) { }
 
     
@@ -42,6 +44,7 @@ export class VoucherDashComponent implements OnInit {
     user_id = this.user.getUserSession().id;
 
     ngOnInit() {
+        this.spinner.show()
         //Get voucher statistics
         this.http.get( this.api.VOUCHERS+"/topups/merchant/" + this.merchant_id ).subscribe(
             res=>{
@@ -51,6 +54,8 @@ export class VoucherDashComponent implements OnInit {
                 this.http.get(url).subscribe( res => {
                     //Add up funds
                     this.customers = res;
+
+                    this.spinner.hide()
                 });
 
                 //Add up funds
@@ -83,7 +88,7 @@ export class VoucherDashComponent implements OnInit {
 
         for(var i=0; i<data.length; i++){
             var id,name,amount;
-            id="xxxx";
+            id = data[i].id;
             name = data[i].name;
             amount = data[i].totalTopups;
             customers.push([name, amount]);
@@ -108,6 +113,8 @@ export class VoucherDashComponent implements OnInit {
 
     /*Add fund to customer*/
     addFund(e){
+        this.spinner.show()
+
         e.preventDefault(); 
 
         var api = this.api.VOUCHERS+"/vouchers/topup"
@@ -132,6 +139,8 @@ export class VoucherDashComponent implements OnInit {
                 this.error = "There was an error! Please try again.";
                 this.success=null;
             }
+
+            this.spinner.hide()
         });
     }
 
@@ -158,6 +167,8 @@ export class VoucherDashComponent implements OnInit {
     /* Generate voucher */
     generateVoucher(e){
         e.preventDefault();
+        this.spinner.show()
+
         let api = this.api.VOUCHERS+"/vouchers/generate"
 
         let packs =[];
@@ -197,6 +208,8 @@ export class VoucherDashComponent implements OnInit {
                     this.error = resp.description;
                     this.success = false;
                 }
+
+                this.spinner.hide()
             });
             /** DONE SEND REQUEST **/
 
@@ -209,7 +222,7 @@ export class VoucherDashComponent implements OnInit {
 
 
      /****CHARTS*****/
-  /* VouchersUsage */
+     /* VouchersUsage */
     voucherUsageChart = new Chart({
         chart: {
             type: 'pie',

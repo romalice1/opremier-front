@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
 import { ApiService} from '../../services/api/api.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-stock',
@@ -18,7 +19,8 @@ export class StockComponent implements OnInit {
 
   constructor(
       private http: HttpClient,
-      private api: ApiService
+      private api: ApiService,
+      protected spinner: Ng4LoadingSpinnerService
       ) { }
 
   //URL to transaction history
@@ -26,12 +28,12 @@ export class StockComponent implements OnInit {
   stockURL = this.api.PRODUCT+"/vendor_stock_products";
 
     ngOnInit() {
-
+        this.spinner.show()
         this.http.get( this.stockURL ).subscribe(
             res => {
-                console.log(res);
                 this.productsData = res;
-            });
+                this.spinner.hide()
+        });
     }
 
   /*Transaction summary chart*/
