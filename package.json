@@ -2,16 +2,19 @@
   "name": "opremier-front",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "app.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod",
+    "start": "ng serve"
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "0.4.0",
     "@angular/animations": "^5.0.0",
     "@angular/cli": "1.6.3",
     "@angular/common": "^5.0.0",
@@ -29,6 +32,7 @@
     "angular5-data-table": "^0.5.1",
     "chart.js": "^2.7.1",
     "core-js": "^2.4.1",
+    "express": "^4.16.2",
     "highcharts": "^6.0.4",
     "ng-gentelella": "^0.2.6",
     "ng4-loading-spinner": "^1.1.1",
@@ -57,5 +61,9 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.4.2"
+  },
+  "engines": {
+    "node": "~7.5.0",
+    "npm": "~4.1.2"
   }
 }
