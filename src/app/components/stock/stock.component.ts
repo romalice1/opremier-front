@@ -13,7 +13,13 @@ export class StockComponent implements OnInit {
 
   productsData = {}; // This obect will contain an array of products
 
-  products = {}
+  // products:[{
+  //     id:string,
+  //     name:string,
+  //     quantity:number
+  // }]
+  products:any = []
+
 
   salesData = {}; 
 
@@ -29,11 +35,51 @@ export class StockComponent implements OnInit {
 
     ngOnInit() {
         this.spinner.show()
-        this.http.get( this.stockURL ).subscribe(
+        this.http.get<any[]>( this.stockURL ).subscribe(
             res => {
-                this.productsData = res;
                 this.spinner.hide()
+
+                //Assign initial values
+                var tmpProd = {
+                    id:       res[0].product.id,
+                    name:     res[0].product.name,
+                    quantity: res[0].currentQuantity
+                }
+                this.products.push( tmpProd );
+                
+                //Loop throught data
+                for(var i=1; i<res.length; i++){
+
+                    var isFound = false;
+
+                    //check if product already exists in array
+                    for (var j=0; j < this.products.length; j++) {
+                        if (this.products[j].id === res[i].product.id) {
+                            this.products[j].quantity = this.products[j].quantity + res[i].currentQuantity;
+                            
+                            isFound = true;
+                        }
+                    }
+
+                    //If nothing was found, create a new object
+                    if( !isFound ){
+                        // Add a new object to the array
+                        var prod = {
+                            id: res[i].product.id,
+                            name: res[i].product.name,
+                            quantity: res[i].currentQuantity
+                        }
+                        this.products.push(prod);
+                    }
+
+                }
         });
+    }
+
+    /* Search array */
+    searchArray(idKey, myArray){
+
+        return false;
     }
 
   /*Transaction summary chart*/
