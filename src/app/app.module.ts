@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { GaugeModule } from 'angular-gauge';
 import { SlideMenuModule } from 'cuppa-ng2-slidemenu/cuppa-ng2-slidemenu'; // For sidebar menu
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import {  } from 'angular5-data-table';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
@@ -71,7 +72,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     HttpModule,
     HttpClientModule,
     FormsModule,
-    // DataTable,
+    BrowserAnimationsModule,
     GaugeModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot()
   ],
