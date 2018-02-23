@@ -28,10 +28,12 @@ export class StockComponent implements OnInit {
 
   stockURL = this.api.PRODUCT+"/vendor_stock_products";
   getSalesApi(start, end){ 
-      return this.api.WALLET+"/transactions/vendor/"+this.user.getUserSession().organization+"?start="+start+"&end"+end;
+      return this.api.PRODUCT+"/sales/merchant/"+this.user.getUserSession().organization+"/transactions?start="+start+"&end"+end;
 
   }
-  tanksUrl = this.api.PRODUCT+"vendor_stocks/vendor/" 
+  getTanksUrl(){
+    return this.api.PRODUCT+"/tanks/vendor/"+this.user.getUserSession().organization+"/attachments"  
+  }
  
     ngOnInit() {
         this.spinner.show()
@@ -77,8 +79,14 @@ export class StockComponent implements OnInit {
                 //Get sales data
                 let startDate = new Date();
 
-                this.http.get( this.getSalesApi("27/10/2018","30/10/2018")  ).subscribe(resp=>{
+                this.http.get<any>( this.getSalesApi("27/10/2017","23/2/2018")  ).subscribe(resp=>{
 
+                    //Check if sales data is provided
+                    if(resp.body.length != 0){
+                        this.salesData = resp.body[0].details //Array of transaction data
+                    }
+
+                    //process data for sales graph
 
                     //display tanks capacity chart
                     let categories=[]
@@ -95,15 +103,31 @@ export class StockComponent implements OnInit {
                 });
 
                 //Get tanks data
-                this.http.get(this.tanksUrl+this.user.getUserSession().organization).subscribe(res=>{
-                    // tanks
+                this.http.get(this.getTanksUrl()).subscribe(res=>{
+                    console.log(res)
                 });
                 
         });
     }
 
+//extract data for transaction chart
+XtransData(input:any[]){
+    let categories=[]
+    let series:any[] = []
+    for(var i=0; i<input.length; i++){
+        categories.push( input[i].recordDate )
+
+        // series.push( {name:input[i].name, } )
+    }
+}
   /*Transaction summary chart*/
-  gentransSummaryChart( /*categories:any[], series:[{name,color,data:any[]}] */){
+  gentransSummaryChart( 
+      // categories:any[], 
+      // series:[{
+      //     name:string,
+      //     data:any[]
+      // }] 
+      ){
       return new Chart({
         chart: {
             type: 'column'

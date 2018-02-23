@@ -33,17 +33,20 @@ export class BranchesComponent implements OnInit {
 
    ngOnInit() {
      this.spinner.show()
+     // 1. get baranches
   	this.http.get( this.getBranchesUrl( this.orgId ) ).subscribe(
   		res =>{
   			this.branches = res;
 
         this.spinner.hide()  
 
-        //get tanks - Invalid CORS returned
+        // 2. get tanks - Invalid CORS returned
         // this.http.get( this.api.PRODUCT+"vendors/"+this.orgId+"/stocks" ).subscribe(
         //   res =>{
         //     this.tanks = res;   
         // });
+        // 3. Get POS
+        // 4. Get pumps
   	});
   }
 

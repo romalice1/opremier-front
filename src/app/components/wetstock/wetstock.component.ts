@@ -19,14 +19,15 @@ export class WetstockComponent implements OnInit {
       private user: UserService) { }
 
     //URL builder
-    getTransUrl(vendorId, startDate, endDate){
-        return this.api.WALLET+"/transactions/vendor/"+vendorId+"?start="+startDate+"&end="+endDate;
-    }
+    getTransUrl(startDate, endDate){
+        let vendor = this.user.getUserSession().organization
+
+        return this.api.PRODUCT+"/sales/dealer/"+vendor+"/transactions?start="+startDate+"&end="+endDate
+     }
 
     ngOnInit() {
-        this.http.get( this.getTransUrl(this.user.getUserSession().organization,"00/00/000","00/00/000") ).subscribe(
+        this.http.get( this.getTransUrl("01/01/2017","23/02/2018") ).subscribe(
             res => {
-                console.log(res);
                 this.transactionData = res;
             });
     }
