@@ -15,10 +15,11 @@ export class ProductsComponent implements OnInit {
 
 	products;
 	baseUrl = this.api.PRODUCT;
+	updateUrl = this.api.PRODUCT+""
 
 	//URL builder
 	getUrl(){
-		return this.baseUrl+"/products";
+		return this.baseUrl+"/product/add";
 	}
 
 	ngOnInit() {
@@ -31,50 +32,40 @@ export class ProductsComponent implements OnInit {
 
 
 	//Update Product
-	updateProduct(childId, parentId, relationshipId){ // Faulty - check API doc
-		this.http.post( this.baseUrl+"/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {})
-		.subscribe(
-			res =>{
-				console.log(res);
-		});
-		console.log("Product updater clicked");
-	}
+	updateProduct(){
+		let payload = {
+			category: "string",
+			price: 0,
+			productId: "string",
+			productName: "string",
+			vendorId: "string"
 
-	//remove a Product
-	removeProduct(childId, parentId, relationshipId){ // Faulty - check APi doc
-		this.http.post( this.baseUrl+"/organization_relationships/child/"+childId+"/relationship/"+relationshipId+"/parent/"+parentId, {})
+		}
+		this.http.post(this.updateUrl, payload)
 		.subscribe(
 			res =>{
 				console.log(res);
 		});
-		console.log("Product removal clicked");
 	}
 
 	//Add a Product
-	addProduct(childId, parentId, relationshipId){ // Faulty - check APi doc
+	addProduct(e){
+		e.preventDefault()
+
+
 		let payload = {
-			category: {
-				activitySector: {
-				  	id: 0,
-				  	isActive: true,
-				  	name: "string"
-				},
-				description: "string",
-				id: 0,
-				name: "string",
-				parentCategory: {}
-			},
-			description: "string",
-			id: "string",
-			isActive: true,
-			name: "string",
-			recordDate: "yyyy-MM-dd HH:mm:ss"
+			category: "string",
+			price: 0,
+			productId: "string",
+			productName: "string",
+			vendorId: "string"
+
 		}
 
-		this.http.post( this.baseUrl+"/products",{})
+		this.http.post( this.api.PRODUCT+"/product/add",payload)
 		.subscribe(
 			res =>{
-				console.log(res);
+				// TODO
 		});
 	}
 

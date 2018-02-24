@@ -52,9 +52,9 @@
                             </td>
                             <td>20</td>
                             <td style="text-align:center;">
-                                <a class="action_icon ico_view" target="_blank"><i class="fa fa-eye"></i></a>
+                                <!-- <a class="action_icon ico_view" data-toggle="modal" data-target=".bs-show-branch-modal"><i class="fa fa-eye"></i></a> -->
                                 <a class="action_icon ico_edit" (click)="updateBranch( branch.childOrgnaization.id )" id="btn_edit"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" (click)="removeBranch( branch.childOrgnaization.id )" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
+                                <!-- <a class="action_icon ico_delete" (click)="removeBranch( branch.childOrgnaization.id )" id="btn_confirm"> <i class="fa fa-trash"></i> </a> -->
                             </td>
                         </tr>
 
@@ -75,19 +75,17 @@
 <!-- Modal contents -->
 
 <!-- Modal_TXT -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-show-branch-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                               </button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Branch details</h4>
             </div>
             <div class="modal-body">
-                <h4>Text in a modal</h4>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p>Branch name</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -104,7 +102,7 @@
 <div class="modal fade bs-example-modal-form" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <form class="form-horizontal form-label-left input_mask">
+            <form (submit)="addBranch($event)" class="form-horizontal form-label-left input_mask">
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
@@ -114,26 +112,66 @@
 
 
                 <div class="modal-body">
+                    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                    <div *ngIf="success" class="alert alert-success">{{sucess}}</div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Branch Name</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Enter branch name...">
+                            <input type="text" class="form-control" placeholder="Enter branch name..." required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Address</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Enter branch description...">
+                            <input type="text" class="form-control" placeholder="Enter branch adress..." required>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">TIN</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Enter business TIN...">
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend>Contact person</legend>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Firstname</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" placeholder="Contact person Firstname..." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Lastname</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" placeholder="Contact person Lastname..." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" placeholder="Contact person Email..." required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Phone</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                <input type="tel" class="form-control" placeholder="Contact person Phone..." required>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
 
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" (click)="addBranch()" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
             </form>

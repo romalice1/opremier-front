@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Headers, Http, HttpModule } from '@angular/http';
 import { UserService } from '../../services/user.service';
 import { ApiService} from '../../services/api/api.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
 	  	private cookieService: CookieService,
 	  	private http: Http,
       private user: UserService,
-      private api: ApiService
+      private api: ApiService,
+      protected spinner: Ng4LoadingSpinnerService
   	) { }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   /* Authentication */ 
   loginUser(e){
-
+    this.spinner.show()
   	e.preventDefault(); // Prevent the form from submiting by default
   	
   	// Get user form data
@@ -52,6 +54,7 @@ export class LoginComponent implements OnInit {
   					// Check if response has error
   					if(data.error){
   						this.alert = "Invalid username or password!";
+              this.spinner.hide()
   					}else{  						
   						//2. Get user details for session tracking (full name, id)
   						this.http.get( this.webAPI+"?p="+this.username+"&access_token=" +this.authService.AccessToken).subscribe(
@@ -71,7 +74,7 @@ export class LoginComponent implements OnInit {
                         res.json().lastName,
                         org.json()[0].organization.id
                         );
-
+                      this.spinner.hide()
                       this.router.navigate(['/stock']);
                     }
 
