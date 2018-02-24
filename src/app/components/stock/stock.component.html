@@ -13,33 +13,16 @@
 <div class="row top_tiles">
 
 
-    <div  *ngFor="let product of productsData" class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div  *ngFor="let product of products" class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-tint"></i></div>
-            <div class="count">{{ product.currentQuantity }} L</div>
-            <h3>{{ product.product.name }}</h3>
-            <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 3% </i> From last Week</span></p>
+            <div class="count">{{ product.quantity | number }} L</div>
+            <h3>{{ product.name }}</h3>
+            <p><span class="count_bottom"><!--<i class="green"> <i class="fa fa-sort-asc"></i> 3% </i> --> From all vendors</span></p>
         </div>
     </div>
 
-    <!-- <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-tint"></i></div>
-            <div class="count">200,000 L</div>
-            <h3>Gasoil</h3>
-            <p><span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> 15% </i> From last Week</span></p>
-        </div>
-    </div>
-
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <div class="tile-stats">
-            <div class="icon"><i class="fa fa-tint"></i></div>
-            <div class="count">100,000 L</div>
-            <h3>Kerosene</h3>
-            <p><span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span></p>
-        </div>
-    </div> -->
-
+    
 </div>
 <!-- End TOP TILES -->
 
