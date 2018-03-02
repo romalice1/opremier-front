@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService} from '../../services/api/api.service';
-
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -13,11 +13,12 @@ export class OrdersComponent implements OnInit {
 
 	constructor(
 		private http: HttpClient,
-	    private api: ApiService
+	    private api: ApiService,
+	    private user: UserService
 	) { }
 
 	data;
-	url = this.api.PRODUCT+"/vendor_stock_order";
+	url = this.api.PRODUCT+"/orders/dealer/"+this.user.getUserSession().organization;
 
 	ngOnInit() {
 		this.http.get( this.url ).subscribe(

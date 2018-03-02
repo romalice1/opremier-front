@@ -17,11 +17,11 @@ export class ProductsComponent implements OnInit {
 
 	products;
 	baseUrl = this.api.PRODUCT;
-	updateUrl = this.api.PRODUCT+""
+	updateUrl = this.api.PRODUCT;
 
 	//URL builder
 	getUrl(vendorId){
-		return this.baseUrl+"/products/vendor/"+vendorId;
+		return this.baseUrl+"/products/dealer/"+vendorId;
 	}
 
 	ngOnInit() {

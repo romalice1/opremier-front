@@ -23,7 +23,7 @@ export class SalesComponent implements OnInit {
 
     //URL builder
     getSalesUrl(ids, startDate, endDate){
-        return this.walletURl+"/transactions/vendor/"+ids+"/paymentmethods/start/"+startDate+"/end/"+endDate;
+        return this.walletURl+"/transactions/dealer/"+ids+"/paymentmethods/start/"+startDate+"/end/"+endDate;
     }
 
 	ngOnInit() {

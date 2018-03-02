@@ -36,7 +36,6 @@ export class TanksComponent implements OnInit {
             res =>{
                 console.log(res);
         });
-        console.log("Tank updater clicked");
     }
 
     //remove a Tank
@@ -54,7 +53,6 @@ export class TanksComponent implements OnInit {
             res =>{
                 console.log(res);
         });
-        console.log("Tank addition clicked");
     }
 
 

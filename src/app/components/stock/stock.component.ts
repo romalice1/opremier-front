@@ -26,18 +26,40 @@ export class StockComponent implements OnInit {
       private user: UserService
       ) { }
 
-  stockURL = this.api.PRODUCT+"/vendor_stock_products";
+  // stockURL = this.api.PRODUCT+"/vendor_stock_products";
+  stockUrl(start, end){
+      return this.api.PRODUCT+"/dealers/"+this.user.getUserSession().organization+"?start="+start+"&end="+end;
+  }
   getSalesApi(start, end){ 
       return this.api.PRODUCT+"/sales/merchant/"+this.user.getUserSession().organization+"/transactions?start="+start+"&end"+end;
 
   }
   getTanksUrl(){
-    return this.api.PRODUCT+"/tanks/vendor/"+this.user.getUserSession().organization+"/attachments"  
+    return this.api.PRODUCT+"/tanks/dealer/"+this.user.getUserSession().organization+"/attachments"  
+  }
+
+  // Format today's date
+  today(){
+        var today = new Date();
+        var dd:any = today.getDate();
+        var mm:any = today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+ dd;
+        } 
+        if(mm<10){
+            mm='0'+mm;
+        } 
+        
+        return dd+'/'+mm+'/'+yyyy;
   }
  
     ngOnInit() {
+        console.log( this.today() );
         this.spinner.show()
-        this.http.get<any[]>( this.stockURL ).subscribe(
+
+        this.http.get<any[]>( this.stockUrl( this.today(), this.today() ) ).subscribe(
             res => {
                 this.spinner.hide()
 
