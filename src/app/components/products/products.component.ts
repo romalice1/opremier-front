@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService} from '../../services/api/api.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-products',
@@ -11,20 +12,21 @@ export class ProductsComponent implements OnInit {
 
 	constructor(
 		private http: HttpClient,
-		private api: ApiService) { }
+		private api: ApiService,
+		private user: UserService) { }
 
 	products;
 	baseUrl = this.api.PRODUCT;
 	updateUrl = this.api.PRODUCT+""
 
 	//URL builder
-	getUrl(){
-		return this.baseUrl+"/product/add";
+	getUrl(vendorId){
+		return this.baseUrl+"/products/vendor/"+vendorId;
 	}
 
 	ngOnInit() {
 		// Get all products
-		this.http.get( this.getUrl() ).subscribe(
+		this.http.get( this.getUrl( this.user.getUserSession().organization ) ).subscribe(
 	  		res =>{
 	  			this.products = res;
 	  	});
