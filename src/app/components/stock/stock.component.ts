@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService} from '../../services/api/api.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UserService } from '../../services/user.service';
+import { DateService } from '../../services/dates/date.service';
 
 @Component({
   selector: 'app-stock',
@@ -12,54 +13,73 @@ import { UserService } from '../../services/user.service';
 })
 export class StockComponent implements OnInit {
 
-  products = [] //[{id:string,name:string,quantity:string}] 
-  salesData = {}; 
+    products = [] //[{id:string,name:string,quantity:string}] 
+    salesData = {}; 
 
-  tanksCapacityChart = {}
-  transSummaryChart = {}
-  productSalesChart = {}
+    tanksCapacityChart = {}
+    transSummaryChart = {}
+    productSalesChart = {}
 
-  constructor(
+    constructor(
       private http: HttpClient,
       private api: ApiService,
       protected spinner: Ng4LoadingSpinnerService,
-      private user: UserService
+      private user: UserService,
+      private date: DateService
       ) { }
 
-  // stockURL = this.api.PRODUCT+"/vendor_stock_products";
-  stockUrl(start, end){
+    // stockURL = this.api.PRODUCT+"/vendor_stock_products";
+    stockUrl(start, end){
       return this.api.PRODUCT+"/dealers/"+this.user.getUserSession().organization+"?start="+start+"&end="+end;
-  }
-  getSalesApi(start, end){ 
+    }
+
+    getSalesApi(start, end){ 
       return this.api.PRODUCT+"/sales/merchant/"+this.user.getUserSession().organization+"/transactions?start="+start+"&end"+end;
+    }
 
-  }
-  getTanksUrl(){
-    return this.api.PRODUCT+"/tanks/dealer/"+this.user.getUserSession().organization+"/attachments"  
-  }
+    getTanksUrl(){
+        return this.api.PRODUCT+"/tanks/dealer/"+this.user.getUserSession().organization+"/attachments"  
+    }
 
-  // Format today's date
-  today(){
-        var today = new Date();
-        var dd:any = today.getDate();
-        var mm:any = today.getMonth()+1; //January is 0!
+    /* LOAD DATA PER DATES */
+    // Load today
+    loadToday(){
+        this.loadComponentData( this.date.today(), this.date.today() );
+    }
+    
+    //Load yesterday
+    loadYesterday(){
+        this.loadComponentData( this.date.yesterday(), this.date.yesterday() );
+    }
+     
+    // Load last week
+    loadLastWeek(){
+        this.loadComponentData( this.date.lastWeek().start, this.date.lastWeek().end );
+    }
 
-        var yyyy = today.getFullYear();
-        if(dd<10){
-            dd='0'+ dd;
-        } 
-        if(mm<10){
-            mm='0'+mm;
-        } 
-        
-        return dd+'/'+mm+'/'+yyyy;
-  }
- 
+    // Load last month
+    loadLastMonth(){
+        this.loadComponentData( this.date.lastMonth().start, this.date.lastMonth().end );
+    }
+
+    // Load last Year
+    loadLastYear(){
+        this.loadComponentData( this.date.lastYear().start, this.date.lastYear().end );
+    }
+    /* END LOAD DATA PER DATES */
+
+
     ngOnInit() {
-        console.log( this.today() );
+        //Load all data needed by this component
+        this.loadComponentData( this.date.today(), this.date.today() );
+    }
+
+
+    loadComponentData(startDate, endDate){
+
         this.spinner.show()
 
-        this.http.get<any[]>( this.stockUrl( this.today(), this.today() ) ).subscribe(
+        this.http.get<any[]>( this.stockUrl( startDate, endDate ) ).subscribe(
             res => {
                 this.spinner.hide()
 
@@ -99,9 +119,8 @@ export class StockComponent implements OnInit {
                 }
 
                 //Get sales data
-                let startDate = new Date();
 
-                this.http.get<any>( this.getSalesApi("27/10/2017","23/2/2018")  ).subscribe(resp=>{
+                this.http.get<any>( this.getSalesApi(startDate, endDate)  ).subscribe(resp=>{
 
                     //Check if sales data is provided
                     if(resp.body.length != 0){

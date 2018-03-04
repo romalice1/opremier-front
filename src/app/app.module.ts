@@ -17,6 +17,7 @@ import { MyHttpInterceptor } from './services/MyHttp-interceptor';
 import { UserService } from './services/user.service';
 import { AuthguardGuard } from './services/authguard.guard';
 import { ApiService } from './services/api/api.service';
+import { DateService } from './services/dates/date.service'
 
 import { AppComponent } from './app.component';
 import { StockComponent } from './components/stock/stock.component';
@@ -39,6 +40,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { UserAccountsComponent } from './components/user-accounts/user-accounts.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { DaterangeComponent } from './components/daterange/daterange.component';
 
 
 @NgModule({
@@ -62,7 +64,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     LoginComponent,
     NavComponent,
     UserAccountsComponent,
-    ReportsComponent
+    ReportsComponent,
+    DaterangeComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     UserService,
     AuthguardGuard,
     ApiService,
+    DateService,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: MyHttpInterceptor, 
