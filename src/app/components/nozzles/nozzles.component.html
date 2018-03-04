@@ -30,54 +30,14 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>P1A</td>
-                            <td>Pump.CentreVille.3</td>
-                            <td>PMS1</td>
-                            <td>0,000,000.00</td>
-                            <td><strong class="failure">INACTIVE</strong></td>
+                        <tr *ngFor="let nozzle of nozzles">
+                            <td>{{nozzle.name}}</td>
+                            <td>{{nozzle.pumpName}}</td>
+                            <td>{{nozzle.tankName}}</td>
+                            <td>{{nozzle.currentIndex}}</td>
+                            <td><strong class="failure">{{nozzle.status}}</strong></td>
                             <td style="text-align:center;">
                                 <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>P1B</td>
-                            <td>Pump.CentreVille.3</td>
-                            <td>PMS1</td>
-                            <td>0,000,000.00</td>
-                            <td><strong class="success">ACTIVE</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>P2A</td>
-                            <td>Pump.CentreVille.2</td>
-                            <td>PMS2</td>
-                            <td>0,000,000.00</td>
-                            <td><strong class="success">ACTIVE</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>P2B</td>
-                            <td>Pump.CentreVille.2</td>
-                            <td>PMS2</td>
-                            <td>0,000,000.00</td>
-                            <td><strong class="success">ACTIVE</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
 
                             </td>
                         </tr>

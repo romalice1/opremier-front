@@ -17,13 +17,12 @@ export class OrdersComponent implements OnInit {
 	    private user: UserService
 	) { }
 
-	data;
+	orders={};
 	url = this.api.PRODUCT+"/orders/dealer/"+this.user.getUserSession().organization;
 
 	ngOnInit() {
-		this.http.get( this.url ).subscribe(
-		res =>{
-			this.data = res;
+		this.http.get( this.url ).subscribe( res =>{
+			this.orders = res;
 		});
 	}
 

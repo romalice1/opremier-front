@@ -13,7 +13,7 @@ export class TanksComponent implements OnInit {
         private http: HttpClient,
         private api: ApiService ) { }
 
-    data = {};
+    tanks = {};
     baseUrl = this.api.EQUIPMENT;
 
     //URL builder
@@ -25,7 +25,7 @@ export class TanksComponent implements OnInit {
         this.http.get( this.getTanksUrl("tanks") ).subscribe(
           res =>{
               console.log(res);
-              this.data = res;
+              this.tanks = res;
           });
     }
 

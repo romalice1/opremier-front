@@ -33,58 +33,22 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>POS.CentreVille.1</td>
-                            <td>S1000</td>
-                            <td>############</td>
-                            <td>MTN</td>
-                            <td>2G/3G</td>
-                            <td>10%</td>
-                            <td>John Smith</td>
-                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
-                            <td><strong class="failure">OFFLINE</strong></td>
+                        <tr *ngFor = "let pos of pos" >
+                            <td>{{pos.name}} </td>
+                            <td>{{pos.model}}</td>
+                            <td>{{pos.serialNumber}}</td>
+                            <td>{{pos.networkProvider}}</td>
+                            <td>{{pos.connectivity}}</td>
+                            <td>{{pos.batteryLevel}}</td>
+                            <td>{{pos.loggedUser}}</td>
+                            <td>{{pos.lastActivityTime}}</td>
+                            <td><strong class="failure">{{pos.status}}</strong></td>
                             <td style="text-align:center;">
                                 <a class="action_icon ico_info" href="#" id="btn_info_pos"> <i class="fa fa-eye"></i> </a>
                                 <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
                                 <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>POS.CentreVille.1</td>
-                            <td>S1000</td>
-                            <td>############</td>
-                            <td>TIGO</td>
-                            <td>2G/3G</td>
-                            <td>10%</td>
-                            <td>John Smith</td>
-                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
-                            <td><strong class="success">ONLINE</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_info" href="#" id="btn_info_pos"> <i class="fa fa-eye"></i> </a>
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>POS.CentreVille.1</td>
-                            <td>S1000</td>
-                            <td>############</td>
-                            <td>MTN</td>
-                            <td>2G/3G</td>
-                            <td>10%</td>
-                            <td>John Smith</td>
-                            <td>DDD, dd/mm/yyyy at 00:00:00</td>
-                            <td><strong class="success">ONLINE</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_info" href="#" id="btn_info_pos"> <i class="fa fa-eye"></i> </a>
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                            </td>
-                        </tr>
-
 
                     </tbody>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService} from '../../services/api/api.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-nozzles',
@@ -11,21 +12,21 @@ export class NozzlesComponent implements OnInit {
 
     constructor( 
         private http: HttpClient,
-        private api: ApiService ) { }
+        private api: ApiService,
+        private user: UserService ) { }
 
-    data = {};
+    nozzles = {};
     baseUrl = this.api.EQUIPMENT;
 
     //URL builder
-    getNozzlesUrl(equipName){
-        return this.baseUrl+"/equipment_types/name/"+equipName;
+    getNozzlesUrl(){
+        return this.baseUrl+"/nozzles/dealer/"+this.user.getUserSession().organization;
     }
 
     ngOnInit() {
-        this.http.get( this.getNozzlesUrl("nozzle") ).subscribe(
+        this.http.get( this.getNozzlesUrl() ).subscribe(
           res =>{
-              console.log(res);
-              this.data = res;
+              this.nozzles = res;
           });
     }
 

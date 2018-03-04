@@ -10,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class PosTerminalComponent implements OnInit {
 
-	data;
+	pos={};
 
 	constructor( 
 		private http: HttpClient,
@@ -27,8 +27,7 @@ export class PosTerminalComponent implements OnInit {
 	ngOnInit() {
 		this.http.get( this.getPOSUrl( this.user.getUserSession().organization ) ).subscribe(
   		res =>{
-  			console.log(res);
-  			this.data = res;
+  			this.pos = res;
   		});
 	}
 

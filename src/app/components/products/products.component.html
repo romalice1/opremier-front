@@ -1,22 +1,18 @@
- Add price trends + Changes History
 <!-- TOP TILES -->
 <div class="row top_tiles">
 
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div *ngFor = "let product of products" class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="tile-stats text-center">
             <div class="icon"><i class="fa fa-tint"></i></div>
-            <h3>Super</h3>
-            <div class="count">1,022 <small>FRW / L</small></div>
+            <h3>{{product.productName}} </h3>
+            <div class="count">{{product.price | number}} <small>FRW / L</small></div>
             <p>
-                <span class="sparkline22 graph" style="height: 160px;">
-                <canvas width="100%" height="60" style="display: inline-block; vertical-align: top;"></canvas>
-            </span>
-                <br>Price trend from last 6 months
+                <br>Lass price change {{product.lastChangeDate}} 
             </p>
         </div>
     </div>
 
-    <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <!-- <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="tile-stats text-center">
             <div class="icon"><i class="fa fa-tint"></i></div>
             <h3>Gasoil</h3>
@@ -42,7 +38,7 @@
                 <br>Price trend from last 6 months
             </p>
         </div>
-    </div>
+    </div> -->
 
 </div>
 <!-- End TOP TILES -->

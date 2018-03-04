@@ -28,48 +28,15 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>Pump.CentreVille.1</td>
-                            <td>4</td>
-                            <td>PMS1</td>
+                        <tr *ngFor="let pump of pumps">
+                            <td>{{pump.name}}</td>
+                            <td>{{pump.nozzles.length}}</td>
+                            <td>{{pump.tankName}}</td>
                             <td style="text-align:center;">
                                 <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
                                 <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
                             </td>
                         </tr>
-
-
-                        <tr>
-                            <td>Pump.CentreVille.2</td>
-                            <td>2</td>
-                            <td>PMS1</td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Pump.CentreVille.3</td>
-                            <td>4</td>
-                            <td>PMS2</td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Pump.CentreVille.4</td>
-                            <td>4</td>
-                            <td>AGO1</td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_edit" href="#" id="btn_add"> <i class="fa fa-pencil"></i> </a>
-                                <a class="action_icon ico_delete" href="#" id="btn_confirm"> <i class="fa fa-trash"></i> </a>
-                            </td>
-                        </tr>
-
                     </tbody>
 
                 </table>
