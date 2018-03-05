@@ -28,7 +28,7 @@ export class SalesComponent implements OnInit {
     //URL builder
     getSalesUrl(startDate, endDate){
         let vendorId = this.user.getUserSession().organization;
-        return this.walletURl+"/transactions/dealer/"+vendorId+"/paymentmethods/start/"+startDate+"/end/"+endDate;
+        return this.walletURl+"/transactions/dealer/"+vendorId+"/paymentmethods?start="+startDate+"&end="+endDate;
     }
 
     /* LOAD DATA PER DATES */
@@ -60,15 +60,34 @@ export class SalesComponent implements OnInit {
 
 
 	ngOnInit() {
-        this.loadComponentData( this.date.today(), this.date.today() )
+        this.loadComponentData( "04/03/2017", "04/03/2017" )
 	}
 
     loadComponentData(start, end){
-        this.http.get( this.getSalesUrl(start, end) ).subscribe(
+        this.http.get<any>( this.getSalesUrl(start, end) ).subscribe(
             res => {
                 this.transactionData = res;
+
+                //prepare chart-ready data
+                // {
+                //     type:"column",
+                //     name: "pay-method-name",
+                //     data:[200] //Amount
+                // }
+                let series = []
+                if( res.code == 200 ){
+
+                    for(var i=0; i<res.body.data.length; i++){
+                        series[i] = {
+                            type: "column",
+                            name: res.body.data.name,
+                            data: [res.body.data.amount]
+                        }
+                    }
+                }
+
                 this.transactionsChart = this.generateTransactionsChart(0,0);
-                this.salesPerPaymentMethodChart = this.genSalesPerPaymentMethodChart(0,0);
+                this.salesPerPaymentMethodChart = this.genSalesPerPaymentMethodChart( series );
         });
     }
 
@@ -179,7 +198,7 @@ export class SalesComponent implements OnInit {
 
 
 	 /* SALES PER PAYMENT METHODS */
-     genSalesPerPaymentMethodChart(categories, data)
+     genSalesPerPaymentMethodChart(series)
      {
          return new Chart({
             title: {
@@ -225,110 +244,7 @@ export class SalesComponent implements OnInit {
                 headerFormat: null,
                 pointFormat: '<span style="color:{point.color}">{series.name}: <b>{point.y} </b> FRW</span><br />'
             },
-            series: [{
-                    type: 'column',
-                    name: 'CASH',
-                    color: '#000000',
-                    // borderRadius: 4,
-                    data: [4200]
-                },
-                {
-                    type: 'column',
-                    name: 'MTN',
-                    color: '#ffc508',
-                    // borderRadius: 4,
-                    data: [2000]
-                },
-                {
-                    type: 'column',
-                    name: 'TIGO',
-                    color: '#193370',
-                    // borderRadius: 4,
-                    data: [1500]
-                },
-                {
-                    type: 'column',
-                    name: 'AIRTEL',
-                    color: '#ec1f27',
-                    // borderRadius: 4,
-                    data: [1400]
-                },
-                {
-                    type: 'column',
-                    name: 'Voucher',
-                    color: '#7aaa75',
-                    // borderRadius: 4,
-                    data: [2000]
-                },
-                {
-                    type: 'column',
-                    name: 'Debt',
-                    color: '#808080',
-                    // borderRadius: 4,
-                    data: [200]
-                },
-                {
-                    type: 'column',
-                    name: 'Visa',
-                    color: '#1a1f71',
-                    // borderRadius: 4,
-                    data: [1100]
-                },
-                {
-                    type: 'column',
-                    name: 'Mastercard',
-                    color: '#fcbb37',
-                    // borderRadius: 4,
-                    data: [1000]
-                },
-                {
-                    type: 'column',
-                    name: 'ENGEN Card',
-                    color: '#012d90',
-                    // borderRadius: 4,
-                    data: [2500]
-                }, {
-                    type: 'pie',
-                    name: 'Payments Source',
-                    data: [{
-                        name: 'Electonic Payments',
-                        y: 20,
-                        color: '#999999'
-                    }, {
-                        name: 'Cash Payments',
-                        y: 50,
-                        color: '#000000'
-                    }],
-
-                    tooltip: {
-                        enabled: true,
-                        backgroundColor: '#FCFFC5',
-                        borderColor: 'black',
-                        borderRadius: 10,
-                        borderWidth: 3,
-                        pointFormat: ' <b>{point.name}</b>'
-                    },
-
-
-                    center: ['50%', 35],
-                    size: 150,
-                    xAxis: {
-                        categories: ['']
-                    },
-                    showInLegend: true,
-                    dataLabels: {
-                        enabled: true,
-                        color: 'white',
-                        backgroundColor: 'rgba(255, 255, 255, 0.0)',
-                        borderWidth: 0,
-                        distance: -30,
-                        format: '{point.percentage:.2f} %',
-                        connectorColor: 'grey',
-                        connectorWidth: 1
-
-                    }
-                }
-            ]
+            series: series
         });
      }
 
