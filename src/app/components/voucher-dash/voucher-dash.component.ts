@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { ApiService} from '../../services/api/api.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { DateService } from '../../services/dates/date.service';
 
 @Component({
   selector: 'app-voucher-dash',
@@ -18,7 +19,8 @@ export class VoucherDashComponent implements OnInit {
         private http: HttpClient,
         private user: UserService,
         private api: ApiService,
-        protected spinner: Ng4LoadingSpinnerService
+        protected spinner: Ng4LoadingSpinnerService,
+        private date: DateService
     ) { }
 
     
@@ -40,10 +42,42 @@ export class VoucherDashComponent implements OnInit {
     voucherUsageChart={}
     voucherClientsChart={}
 
+    /* LOAD DATA PER DATES */
+    // Load today
+    loadToday(){
+        this.loadComponentData( this.date.today(), this.date.today() );
+    }
+    
+    //Load yesterday
+    loadYesterday(){
+        this.loadComponentData( this.date.yesterday(), this.date.yesterday() );
+    }
+     
+    // Load last week
+    loadLastWeek(){
+        this.loadComponentData( this.date.lastWeek().start, this.date.lastWeek().end );
+    }
+
+    // Load last month
+    loadLastMonth(){
+        this.loadComponentData( this.date.lastMonth().start, this.date.lastMonth().end );
+    }
+
+    // Load last Year
+    loadLastYear(){
+        this.loadComponentData( this.date.lastYear().start, this.date.lastYear().end );
+    }
+    /* END LOAD DATA PER DATES */
+
 
     ngOnInit() {
         this.spinner.show()
-        //Get voucher statistics
+        this.loadComponentData("","")
+     }
+
+
+     loadComponentData(startDate, endDate){
+         //Get voucher statistics
         this.http.get( this.api.VOUCHERS+"/topups/merchant/" + this.merchant_id ).subscribe(
             res=>{
 
@@ -82,7 +116,6 @@ export class VoucherDashComponent implements OnInit {
                 this.voucherUsageChart = this.genVoucherUsageChart(available, redeemed);
                 this.voucherClientsChart = this.genVoucherClientsChart(customers);
             });
-
      }
 
 

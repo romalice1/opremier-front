@@ -18,18 +18,31 @@ export class PumpsComponent implements OnInit {
 
 	pumps = {};
   	baseUrl = this.api.EQUIPMENT;
+  	tanks = [];
+  	alert;
 
 	//URL builder
 	getPumpsUrl(){
 		return this.api.EQUIPMENT+"/pumps/dealer/"+this.user.getUserSession().organization;
 	}
+
 	ngOnInit() {
+		this.loadPumps()
+	}
+
+	loadTanks(){
+		let url = this.api.PRODUCT+"/dealer_stocks/dealer/"+this.user.getUserSession().organization;
+		this.http.get<any>( url ).subscribe(res=>{
+			this.tanks = res;
+		});
+	}
+
+	loadPumps(){
 		this.http.get( this.getPumpsUrl() ).subscribe(
   		res =>{
   			this.pumps = res;
   		});
 	}
-
 
 	//Update Pump
 	updatePump(childId, parentId, relationshipId){ // Faulty - check API doc
@@ -50,12 +63,25 @@ export class PumpsComponent implements OnInit {
 	}
 
 	//Add a Pump
-	addPump(childId, parentId, relationshipId){ // Faulty - check APi doc
-		this.http.post( this.baseUrl+"/oltranz/services/equipment/equipments", {}).subscribe(
+	addPump( e ){
+		console.log(e.target.elements)
+
+		let url = this.api.EQUIPMENT+"/pumps";
+
+		let payload={
+			id:'abcdefgshd',
+		  	name: e.target.elements[1].value,
+		  	ownerId: this.user.getUserSession().organization,
+		  	tankId: e.target.elements[2].value,
+		}
+
+		this.http.post<any>( url, payload).subscribe(
 			res =>{
-				console.log(res);
+				if(res.id){
+					this.alert = "The new pump was successfully added";
+				}
+				this.loadPumps()
 		});
-		console.log("Pump addition clicked");
 	}
 
 

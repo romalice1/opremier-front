@@ -89,16 +89,15 @@ export class BranchesComponent implements OnInit {
     }else{
 
       let payload={
-        businessName:  el[1].value,
-        address:       el[2].value,
-        tin:           el[3].value,
-        contactPersonFirstName:  el[5].value,
-        contactPersonLastName:   el[6].value,
-        contactPersonEmail:      el[7].value,
-        contactPersonTelephone:  el[8].value,
-        applicationId: "opremier",
-        merchantId: this.user.getUserSession().organization,
-        userId: this.user.getUserSession().id
+        "businessName":  el[1].value,
+        "address":       el[2].value,
+        "tin":           el[3].value,
+        "contactPersonFirstName":  el[5].value,
+        "contactPersonLastName":   el[6].value,
+        "contactPersonEmail":      el[7].value,
+        "contactPersonTelephone":  el[8].value,
+        "applicationId": "opremier",
+        "merchantId": this.user.getUserSession().organization
       }
 
       this.http.post<any>(this.api.ORGANIZATION+"/branches", payload).subscribe(

@@ -20,12 +20,12 @@ export class PosTerminalComponent implements OnInit {
 	baseUrl = this.api.EQUIPMENT;
 	
 	//URL builder
-	getPOSUrl(vendorId){
-		return this.baseUrl+"/pos/owner/"+vendorId;
+	getPOSUrl(){
+		return this.baseUrl+"/pos/dealer/"+this.user.getUserSession().organization;
 	}
 
 	ngOnInit() {
-		this.http.get( this.getPOSUrl( this.user.getUserSession().organization ) ).subscribe(
+		this.http.get( this.getPOSUrl() ).subscribe(
   		res =>{
   			this.pos = res;
   		});
@@ -54,6 +54,16 @@ export class PosTerminalComponent implements OnInit {
 	addPOS(e){ // Faulty - check APi doc
 		e.preventDefault();
 		let pos_name = e.target.elements[1].value
+
+		let payload={
+		  "connectivity": "string",
+		  "model": "string",
+		  "name": "string",
+		  "networkProvider": "string",
+		  "ownerId": "string",
+		  "serialNumber": "string"
+
+		}
 
 		// this.http.post( this.baseUrl+"/oltranz/services/equipment/equipments", {}).subscribe(
 		// 	res =>{

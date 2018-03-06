@@ -3,6 +3,7 @@ import { Http, HttpModule } from '@angular/http';
 import { UserService } from '../../services/user.service';
 import { ApiService} from '../../services/api/api.service';
 import { HttpClient } from '@angular/common/http';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-voucher-cust',
@@ -18,7 +19,8 @@ export class VoucherCustComponent implements OnInit {
 	constructor(
 	  	private user: 	UserService,
 	  	private api: 	ApiService,
-	  	private http: 	HttpClient) { }
+	  	private http: 	HttpClient,
+      protected spinner: Ng4LoadingSpinnerService) { }
 
   	ngOnInit() {
   		//Get customer list
@@ -30,13 +32,15 @@ export class VoucherCustComponent implements OnInit {
   	}
 
   	addCustomer(e){
+      this.spinner.show()
+
   		e.preventDefault();
 
   		let url = this.api.VOUCHERS+"/customer";
   		let el = e.target.elements;
 
   		let payload = {
-			applicationId: 			"opremier",
+			applicationId: 			"5ae697d2050611e8b0aa577f7ae20263",
 			businessName: 			el[1].value,
 			tin: 					el[2].value || "",
 			contactPersonFirstName: el[3].value,
@@ -50,7 +54,9 @@ export class VoucherCustComponent implements OnInit {
       let response :any;
 
   		this.http.post(url, payload).subscribe(res=>{
-  			console.log(res);
+
+  			this.spinner.hide()
+        
         response = res;
 
   			if( response.code == 200 ){

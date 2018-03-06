@@ -15,7 +15,9 @@ export class ProductsComponent implements OnInit {
 		private api: ApiService,
 		private user: UserService) { }
 
-	products;
+	products={};
+	alert;
+	categories:any = [];
 	baseUrl = this.api.PRODUCT;
 	updateUrl = this.api.PRODUCT;
 
@@ -24,17 +26,32 @@ export class ProductsComponent implements OnInit {
 		return this.baseUrl+"/products/dealer/"+vendorId;
 	}
 
+	//Get product categories
+	getCategories(){
+		let url = this.baseUrl+"/categories"
+
+		this.http.get( url ).subscribe(
+	  		res =>{
+	  			this.categories = res;
+	  	});
+	}
+
 	ngOnInit() {
 		// Get all products
+		this.loadComponentData()
+	}
+
+	loadComponentData(){
 		this.http.get( this.getUrl( this.user.getUserSession().organization ) ).subscribe(
 	  		res =>{
 	  			this.products = res;
 	  	});
 	}
 
-
 	//Update Product
-	updateProduct(){
+	updateProduct(index){
+		let productId = index.path[3].cells[0].innerText;
+
 		let payload = {
 			category: "string",
 			price: 0,
@@ -43,31 +60,31 @@ export class ProductsComponent implements OnInit {
 			vendorId: "string"
 
 		}
-		this.http.post(this.updateUrl, payload)
-		.subscribe(
-			res =>{
-				console.log(res);
-		});
+
+		// this.http.post(this.updateUrl, payload).subscribe(
+		// 	res =>{
+		// 		console.log(res);
+		// });
 	}
 
 	//Add a Product
 	addProduct(e){
 		e.preventDefault()
 
+		let el = e.target.elements;
 
 		let payload = {
-			category: "string",
-			price: 0,
-			productId: "string",
-			productName: "string",
-			vendorId: "string"
+			category: el[2].value,
+			price: el[3].value,
+			productName: el[1].value,
+			vendorId: this.user.getUserSession().organization
 
 		}
 
-		this.http.post( this.api.PRODUCT+"/product/add",payload)
-		.subscribe(
+		this.http.post<any>( this.api.PRODUCT+"/product/add",payload).subscribe(
 			res =>{
-				// TODO
+				this.alert = res.description;
+				this.loadComponentData()
 		});
 	}
 
