@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService} from '../../services/api/api.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-nozzles',
@@ -11,22 +12,27 @@ export class NozzlesComponent implements OnInit {
 
     constructor( 
         private http: HttpClient,
-        private api: ApiService ) { }
+        private api: ApiService,
+        private user: UserService ) { }
 
-    data = {};
+    nozzles = {};
     baseUrl = this.api.EQUIPMENT;
+    pumps = []
+    tanks = []
 
     //URL builder
-    getNozzlesUrl(equipName){
-        return this.baseUrl+"/equipment_types/name/"+equipName;
+    getNozzlesUrl(){
+        return this.baseUrl+"/nozzles/dealer/"+this.user.getUserSession().organization;
     }
 
     ngOnInit() {
-        this.http.get( this.getNozzlesUrl("nozzle") ).subscribe(
-          res =>{
-              console.log(res);
-              this.data = res;
-          });
+        this.loadNozzles();
+    }
+
+    loadNozzles(){
+        this.http.get( this.getNozzlesUrl() ).subscribe( res =>{
+            this.nozzles = res;
+        });
     }
 
     //Update Nozzle
@@ -48,12 +54,49 @@ export class NozzlesComponent implements OnInit {
     }
 
     //Add a Nozzle
-    addNozzle(childId, parentId, relationshipId){ // Faulty - check APi doc
-        this.http.post( this.baseUrl+"/oltranz/services/equipment/equipments", {}).subscribe(
-            res =>{
-                console.log(res);
+    addNozzle(event){
+        let el = event.target.elements;
+        let url = this.api.EQUIPMENT+"/nozzles";
+
+        let nozzle = el[1].value
+        let pump = el[2].value
+        let tank = el[3].value
+
+
+        
+        let payload={
+          id: "abcdef",
+          name: nozzle,
+          ownerId: this.user.getUserSession().organization,
+          pumpId: pump,
+          status: "active",
+          tankId: tank
+        }
+
+        this.http.post( url, payload).subscribe( res =>{
+            console.log(res)
+            this.loadNozzles();
         });
-        console.log("Nozzle addition clicked");
+    }
+
+    //load tanks
+    loadTanks(){
+        let url = this.api.PRODUCT+"/dealer_stocks/dealer/"+this.user.getUserSession().organization;
+        this.http.get<any>( url ).subscribe(res=>{
+            this.tanks = res;
+        });
+    }
+
+    // load pumps
+    loadPumps(){
+        let url = this.api.EQUIPMENT+"/pumps/dealer/"+this.user.getUserSession().organization;
+        
+        this.http.get<any>( url ).subscribe( res =>{
+              this.pumps = res;
+        });
+
+        //Now load tanks
+        this.loadTanks();
     }
 
 

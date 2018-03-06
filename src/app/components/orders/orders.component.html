@@ -1,5 +1,5 @@
 <!-- TOP TILES -->
-<div class="row top_tiles">
+<!-- <div class="row top_tiles">
 
     <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="tile-stats">
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-</div>
+</div> -->
 <!-- End TOP TILES -->
 
 <!-- INNER TILES -->
@@ -58,62 +58,19 @@
 
                     <tbody>
 
-                        <tr>
-                            <td>#######</td>
-                            <td>dd/mm/yyyy</td>
-                            <td>Branch name</td>
-                            <td>Super</td>
-                            <td>00,000 L</td>
-                            <td>RAA 000 A</td>
-                            <td>Company</td>
-                            <td><strong class="pending">PENDING</strong></td>
+                        <tr *ngFor="let order of orders">
+                            <td>{{order.id}}</td>
+                            <td>{{order.recordDate}}</td>
+                            <td>{{order.branchName}}</td>
+                            <td>{{order.productName}}</td>
+                            <td>{{order.quantity}}</td>
+                            <td>{{order.trackPlateNumber}}</td>
+                            <td>{{order.transportCompany}}</td>
+                            <td><strong class="pending">{{order.status}}</strong></td>
                             <td style="text-align:center;">
                                 <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-print"></i></a>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>#######</td>
-                            <td>dd/mm/yyyy</td>
-                            <td>Branch name</td>
-                            <td>Super</td>
-                            <td>00,000 L</td>
-                            <td>RAA 000 A</td>
-                            <td>Company</td>
-                            <td><strong class="success">RECEIVED</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-print"></i></a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>#######</td>
-                            <td>dd/mm/yyyy</td>
-                            <td>Branch name</td>
-                            <td>Super</td>
-                            <td>00,000 L</td>
-                            <td>RAA 000 A</td>
-                            <td>Company</td>
-                            <td><strong class="pending">PENDING</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-print"></i></a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>#######</td>
-                            <td>dd/mm/yyyy</td>
-                            <td>Branch name</td>
-                            <td>Super</td>
-                            <td>00,000 L</td>
-                            <td>RAA 000 A</td>
-                            <td>Company</td>
-                            <td><strong class="failure">UNLOADED</strong></td>
-                            <td style="text-align:center;">
-                                <a class="action_icon ico_view" href="#" id="btn_info"><i class="fa fa-print"></i></a>
-                            </td>
-                        </tr>
-
                     </tbody>
 
                 </table>

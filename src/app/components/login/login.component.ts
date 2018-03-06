@@ -55,7 +55,9 @@ export class LoginComponent implements OnInit {
   					if(data.error){
   						this.alert = "Invalid username or password!";
               this.spinner.hide()
-  					}else{  						
+  					}else{  
+
+              this.spinner.hide()						
   						//2. Get user details for session tracking (full name, id)
   						this.http.get( this.webAPI+"?p="+this.username+"&access_token=" +this.authService.AccessToken).subscribe(
   							res => {
@@ -74,7 +76,6 @@ export class LoginComponent implements OnInit {
                         res.json().lastName,
                         org.json()[0].organization.id
                         );
-                      this.spinner.hide()
                       this.router.navigate(['/stock']);
                     }
 

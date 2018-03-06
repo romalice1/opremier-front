@@ -3,7 +3,8 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
-declare var $:any;
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-nav',
@@ -12,13 +13,11 @@ declare var $:any;
 })
 export class NavComponent implements OnInit { 
 
-	route
+	session;
+	isLoggedIn;
 
-	constructor( 
-		private user: UserService,
-		private router: Router,
-		private location: Location
-		) { 
+	constructor( private user: UserService, private router: Router,	private location: Location) 
+	{ 
 		//track router
 		router.events.subscribe((val)=>{
 			if(location.path() == '/stock'){
@@ -30,9 +29,6 @@ export class NavComponent implements OnInit {
 		});
 	}
 
-	session;
-	isLoggedIn;
-
 
 	ngOnInit() {
 		//Redirect user if session not set
@@ -40,8 +36,7 @@ export class NavComponent implements OnInit {
 			this.router.navigate(['/login']);
 		}
 
-    this.isLoggedIn = this.user.getUserLoggedIn();
-    this.session = this.user.getUserSession();
+	    this.initNavbar()
   	}
 
 	/*Logout*/
@@ -53,35 +48,31 @@ export class NavComponent implements OnInit {
 		}
 	}
 
+	initNavbar(){
+		this.isLoggedIn = this.user.getUserLoggedIn();
+	    this.session = this.user.getUserSession();
+	}
 
+	
+	/* MENU SHOW/HIDE OPTIONS */
+	toggleDashboard(){
+   		$('.dash_child').slideToggle(); //
+  	}
 
-  	/*
-  	private menuItemsArray: any[] = [ 
-       {"title":"Electricity","link":"#"},
-       {"title":"Mobile Bill","link":"#"},
-       {"title":"Home and Kitchen","link":"#",
-       "subItems":[
-                   {"title":"Furniture","link":"#"},
-                   {"title":"Cookware","link":"#"},
-                  ]
-       },
-       {"title":"Car and Bike Accessories","link":"#",
-        "subItems":[
-                     {"title":"Tyres and Alloys","link":"#"},
-                     {"title":"Comfort and Safety","link":"#"},
-                    ]
-       },
- 	];
- 
-	public onMenuClose(){
-		console.log("menu closed");
-	}
-	public onMenuOpen(){
-		console.log("menu Opened");
-	}
-	private onItemSelect(item:any){
-		console.log(item);
-	}
-	*/
+	toggleEquipments(){
+   		$('.equip_child').slideToggle(); //
+  	} 
+
+  	toggleVouchers(){
+  		$('.voucher_child').slideToggle(); //
+  	} 	
+
+  	toggleUsers(){
+  		$('.user_child').slideToggle(); //
+  	} 
+
+  	toggleLeftMenuBar(){
+  		$('.left_menu_bar').slideToggle();
+  	}
 
 }

@@ -3,6 +3,7 @@ import { Chart } from 'angular-highcharts';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { ApiService} from '../../services/api/api.service';
+import { DateService } from '../../services/dates/date.service';
 
 @Component({
   selector: 'app-wetstock',
@@ -16,7 +17,8 @@ export class WetstockComponent implements OnInit {
   constructor(
       private http: HttpClient,
       private api: ApiService,
-      private user: UserService) { }
+      private user: UserService,
+      private date: DateService) { }
 
     //URL builder
     getTransUrl(startDate, endDate){
@@ -25,13 +27,43 @@ export class WetstockComponent implements OnInit {
         return this.api.PRODUCT+"/sales/dealer/"+vendor+"/transactions?start="+startDate+"&end="+endDate
      }
 
-    ngOnInit() {
-        this.http.get( this.getTransUrl("01/01/2017","23/02/2018") ).subscribe(
-            res => {
-                this.transactionData = res;
-            });
+
+    /* LOAD DATA PER DATES */
+    // Load today
+    loadToday(){
+        this.loadComponentData( this.date.today(), this.date.today() );
+    }
+    
+    //Load yesterday
+    loadYesterday(){
+        this.loadComponentData( this.date.yesterday(), this.date.yesterday() );
+    }
+     
+    // Load last week
+    loadLastWeek(){
+        this.loadComponentData( this.date.lastWeek().start, this.date.lastWeek().end );
     }
 
+    // Load last month
+    loadLastMonth(){
+        this.loadComponentData( this.date.lastMonth().start, this.date.lastMonth().end );
+    }
+
+    // Load last Year
+    loadLastYear(){
+        this.loadComponentData( this.date.lastYear().start, this.date.lastYear().end );
+    }
+    /* END LOAD DATA PER DATES */
+
+    ngOnInit() {
+        this.loadComponentData( this.date.today(), this.date.today() )
+    }
+
+    loadComponentData(startDate, endDate){
+        this.http.get( this.getTransUrl(startDate,endDate) ).subscribe( res => {
+            this.transactionData = res;
+        });
+    }
  /* QUANTITIES SALES DAILY */        
 lossAnalysisChart = new Chart ({
 	
