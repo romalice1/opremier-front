@@ -342,7 +342,7 @@ XtransData(input:any[]){
             },
             plotOptions: {
                 series: {
-                    dataLabels: {
+                    /*dataLabels: {
                         enabled: true,
                         format: '{point.y:,.0f} L',
                         borderRadius: 0,
@@ -352,7 +352,7 @@ XtransData(input:any[]){
                         y: -6
                     },
                     pointPadding: 0.1,
-                    groupPadding: 0.02
+                    groupPadding: 0.02*/
                 }
             },
             tooltip: {
@@ -360,16 +360,16 @@ XtransData(input:any[]){
                 headerFormat: null,
                 pointFormat: '<span style="color:{point.color}">{series.name}: <b>{point.y} </b> L</span><br />'
             },
-            series: [{
+            /*series: [{
                     showInLegend: false,
                     colorByPoint: true,
                     borderRadius: '4',
                     name: 'Current Quantity',
                     // colors: ['#057ac0', '#d9d928', '#000000'],
                     data: dispData
-                }],
+                }],/*
             responsive: {
-                rules: [{
+                ules: [{
                         condition: {
                             maxWidth: 500
                         },
@@ -406,7 +406,7 @@ XtransData(input:any[]){
                         }
                     }]
             }
-
+*/
       });
    }
   /* END tanks capacity */
@@ -447,105 +447,5 @@ XtransData(input:any[]){
       });
     } 
       /* END product sales */
-
-      /* Individual Tanks Capacity */
-      /* TANKS 1 GAUGE */
-    genTankChart(){
-        return new Chart({
-            chart: {
-                type: 'gauge',
-                plotBackgroundColor: null,
-                plotBackgroundImage: null,
-                plotBorderWidth: 0,
-                plotShadow: false,
-                backgroundColor: null
-            },
-
-
-            title: {
-                text: 'Tank 1'
-            },
-
-
-            tooltip: {
-                enabled: false
-            },
-
-
-            pane: {
-                center: ['50%', '85%'],
-                size: '140%',
-                startAngle: -90,
-                endAngle: 90,
-                background: {
-                    backgroundColor: '#ffffff',
-                    borderWidth: 0,
-                    outerRadius: '100%',
-                    innerRadius: '30%',
-                    shape: 'arc'
-                }
-            },
-
-            yAxis: {
-                min: 0,
-                max: 10000,
-                minorTickInterval: 'auto',
-                minorTickWidth: 1,
-                minorTickLength: 3,
-                minorTickPosition: 'outside',
-                minorTickColor: '#666',
-                tickPixelInterval: 45,
-                tickWidth: 2,
-                tickPosition: 'outside',
-                tickLength: 5,
-                tickColor: '#c0c0c0',
-                labels: {
-                    step: 2,
-                    rotation: 'auto'
-                },
-                title: {
-                    text: 'PMS1',
-                    y: -100
-                },
-
-                plotBands: [{
-                    from: 5000,
-                    to: 10000,
-                    color: '#55BF3B' //green
-                }, {
-                    from: 3000,
-                    to: 5000,
-                    color: '#DDDF0D' //yellow
-                }, {
-                    from: 0,
-                    to: 3000,
-                    color: '#DF5353' //red
-                }]
-            },
-
-            plotOptions: {
-                gauge: {
-                    dataLabels: {
-                        y: 37,
-                        borderWidth: 0,
-                        useHTML: true,
-                        format: '{point.y} Liters',
-                        color: '{point.color}'
-
-                    }
-                }
-            },
-
-            series: [{
-                name: 'Quantity',
-                data: [7200],
-                y: 70,
-                x: 2
-            }]
-
-        }); 
-    }
-    /* END TANKS 1 GAUGE */
-/* END Individual Tanks Capacity */
 
 }
