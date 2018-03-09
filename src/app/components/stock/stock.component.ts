@@ -16,9 +16,15 @@ export class StockComponent implements OnInit {
     products = [] //[{id:string,name:string,quantity:string}] 
     salesData = {}; 
 
+    error:any =false
+
     tanksCapacityChart = {}
     transSummaryChart = {}
     productSalesChart = {}
+
+    // Dates displayed on the template
+    startDate=""
+    endDate=""
 
     constructor(
       private http: HttpClient,
@@ -28,7 +34,12 @@ export class StockComponent implements OnInit {
       private date: DateService
       ) { }
 
-    // stockURL = this.api.PRODUCT+"/vendor_stock_products";
+
+
+    setErrorFalse(){
+        this.error = false;
+    }
+
     stockUrl(start, end){
       return this.api.PRODUCT+"/dealers/"+this.user.getUserSession().organization+"?start="+start+"&end="+end;
     }
@@ -45,33 +56,60 @@ export class StockComponent implements OnInit {
     // Load today
     loadToday(){
         this.loadComponentData( this.date.today(), this.date.today() );
+        this.updateDisplayDates( this.date.today(), this.date.today() )
     }
     
     //Load yesterday
     loadYesterday(){
         this.loadComponentData( this.date.yesterday(), this.date.yesterday() );
+        this.updateDisplayDates( this.date.yesterday(), this.date.yesterday() )
     }
      
     // Load last week
     loadLastWeek(){
         this.loadComponentData( this.date.lastWeek().start, this.date.lastWeek().end );
+        this.updateDisplayDates( this.date.lastWeek().start, this.date.lastWeek().end )
     }
 
     // Load last month
     loadLastMonth(){
         this.loadComponentData( this.date.lastMonth().start, this.date.lastMonth().end );
+        this.updateDisplayDates( this.date.lastMonth().start, this.date.lastMonth().end )
     }
 
     // Load last Year
     loadLastYear(){
         this.loadComponentData( this.date.lastYear().start, this.date.lastYear().end );
+        this.updateDisplayDates( this.date.lastYear().start, this.date.lastYear().end )
     }
+
+    // load custom date
+    loadCustomPeriod(e:any){
+        e.preventDefault()
+
+        if( e.target.elements[0].value == '' && e.target.elements[1].value == '' ){
+            this.error = "Select date range";
+        }else{
+            this.error = false;
+            let start = this.date.dateFormater(e.target.elements[0].value)
+            let end = this.date.dateFormater(e.target.elements[1].value)
+            
+            this.loadComponentData(start, end)
+            this.updateDisplayDates( start, end )
+        }
+    }
+
     /* END LOAD DATA PER DATES */
 
+    updateDisplayDates(start, end){
+        this.startDate = start
+        this.endDate = end
+    }
 
     ngOnInit() {
         //Load all data needed by this component
         this.loadComponentData( this.date.today(), this.date.today() );
+        this.updateDisplayDates( this.date.today(), this.date.today() )
     }
 
 

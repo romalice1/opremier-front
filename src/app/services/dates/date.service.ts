@@ -106,18 +106,26 @@ export class DateService {
 
   	// Last year
   	lastYear(){
-		let year={
-			start: '',
-			end: ''
-		}
+  		let year={
+  			start: '',
+  			end: ''
+  		}
 
-		let today = new Date();
-		
-		var yyy = today.getFullYear() - 1; //Current year - 1 to get last year
+  		let today = new Date();
+  		
+  		var yyy = today.getFullYear() - 1; //Current year - 1 to get last year
 
-		year.start = '01/01/'+yyy;
-		year.end = '31/12/'+yyy;
+  		year.start = '01/01/'+yyy;
+  		year.end = '31/12/'+yyy;
 
-		return year;
+  		return year;
   	}
+
+
+
+    //change date format from mm/dd/yyyy to dd/mm/yyyy
+    dateFormater(date:string){
+        let splitted = date.split("-")
+        return splitted[2]+"/"+splitted[1]+"/"+splitted[0]
+    }
 }
