@@ -117,15 +117,15 @@ export class StockComponent implements OnInit {
 
         this.spinner.show()
 
-        this.http.get<any[]>( this.stockUrl( startDate, endDate ) ).subscribe(
+        this.http.get<any>( this.stockUrl( startDate, endDate ) ).subscribe(
             res => {
                 this.spinner.hide()
-
+                res = res.body[0].organizationName[0].products
                 //Assign initial values
                 var tmpProd = {
-                    id:       res[0].product.id,
-                    name:     res[0].product.name,
-                    quantity: res[0].currentQuantity
+                    id:       res[0].id,
+                    name:     res[0].name,
+                    quantity: res[0].quantity
                 }
                 this.products.push( tmpProd );
                 
@@ -136,8 +136,8 @@ export class StockComponent implements OnInit {
 
                     //check if product already exists in array
                     for (var j=0; j < this.products.length; j++) {
-                        if (this.products[j].id === res[i].product.id) {
-                            this.products[j].quantity = this.products[j].quantity + res[i].currentQuantity;
+                        if (this.products[j].id === res[i].id) {
+                            this.products[j].quantity = this.products[j].quantity + res[i].quantity;
                             
                             isFound = true;
                         }
@@ -147,9 +147,9 @@ export class StockComponent implements OnInit {
                     if( !isFound ){
                         // Add a new object to the array
                         var prod = {
-                            id: res[i].product.id,
-                            name: res[i].product.name,
-                            quantity: res[i].currentQuantity
+                            id: res[i].id,
+                            name: res[i].name,
+                            quantity: res[i].quantity
                         }
                         this.products.push(prod);
                     }

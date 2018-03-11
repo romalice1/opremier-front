@@ -12,7 +12,7 @@ import { DateService } from '../../services/dates/date.service';
 })
 export class SalesComponent implements OnInit {
 
-    transactionData={};
+    transactionData:any = {};
     walletURl = this.api.WALLET;
     organizationURL = this.api.ORGANIZATION+"/organization_user/user/"
     
