@@ -2,15 +2,40 @@
 
 <div class="row">
     <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
-        <button (click)="loadToday()" type="button" class="col-xs-3 btn btn-default btn-sm">Today</button>
+        <button (click)="loadToday()" type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
         <button (click)="loadYesterday()" type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
         <button (click)="loadLastWeek()" type="button" class="col-xs-2 btn btn-default btn-sm">Last Week</button>
         <button (click)="loadLastMonth()" type="button" class="col-xs-2 btn btn-default btn-sm">Last Month</button>
-        <button (click)="loadLastYear()" type="button" class="col-xs-3 btn btn-default btn-sm">Last Year</button>
+        <button (click)="loadLastYear()" type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
+        <button (click)="setErrorFalse()" type="button" class="col-xs-2 btn btn-default btn-sm" data-toggle="modal" data-target=".bs-modal-custom-calendar">Custom</button>
+    </div>
+        <small class="text-muted" style="margin-left:10px;">Showing from {{startDate}} to {{endDate}} </small>
+</div>
+<!-- TOP TILES -->
+
+<!-- Modal_FORM -->
+<div class="modal fade bs-modal-custom-calendar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div *ngIf="error" class="text-danger">{{error}}</div>
+            <form (submit)="loadCustomPeriod($event)" class="form-inline">
+                <div class="form-group">
+                    <label class="sr-only" for="dateFrom">From</label>
+                    <input type="date" class="form-control" id="dateFrom" placeholder="From">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="dateTo">To</label>
+                    <input type="date" class="form-control" id="dateTo" placeholder="To">
+                </div>
+              <button  type="submit" class="btn btn-default">Ok</button>
+            </form>
+        </div>
     </div>
 </div>
+<!-- End Modal_FORM -->
+
     
-<div *ngIf="transactionData.body.totalAmount" >
+<div *ngIf="transactionData.body" >
     <!-- TOP TILES -->
     <div class="row top_tiles">
 

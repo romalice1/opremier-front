@@ -1,7 +1,4 @@
 <div class="row">
-    <div class="row">
-        <small class="text-muted">Showing from <span class='label label-default'>{{startDate}}</span> to <span class='label label-default'>{{endDate}}</span></small>
-    </div>
     <div class="col-xs-12 btn-group x_panel_filter" role="group" aria-label="First group">
         <button (click)="loadToday()" type="button" class="col-xs-2 btn btn-default btn-sm">Today</button>
         <button (click)="loadYesterday()" type="button" class="col-xs-2 btn btn-default btn-sm">Yesterday</button>
@@ -10,6 +7,7 @@
         <button (click)="loadLastYear()" type="button" class="col-xs-2 btn btn-default btn-sm">Last Year</button>
         <button (click)="setErrorFalse()" type="button" class="col-xs-2 btn btn-default btn-sm" data-toggle="modal" data-target=".bs-modal-custom-calendar">Custom</button>
     </div>
+        <small class="text-muted" style="margin-left:10px;">Showing from {{startDate}} to {{endDate}} </small>
 </div>
 <!-- TOP TILES -->
 

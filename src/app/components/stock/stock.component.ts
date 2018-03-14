@@ -21,6 +21,7 @@ export class StockComponent implements OnInit {
     tanksCapacityChart = {}
     transSummaryChart = {}
     productSalesChart = {}
+    tanks = {}
 
     // Dates displayed on the template
     startDate=""
@@ -98,13 +99,13 @@ export class StockComponent implements OnInit {
             this.updateDisplayDates( start, end )
         }
     }
-
-    /* END LOAD DATA PER DATES */
-
+    
     updateDisplayDates(start, end){
         this.startDate = start
         this.endDate = end
     }
+
+    /* END LOAD DATA PER DATES */
 
     ngOnInit() {
         //Load all data needed by this component
@@ -118,13 +119,13 @@ export class StockComponent implements OnInit {
         this.spinner.show()
 
         this.http.get<any>( this.stockUrl( startDate, endDate ) ).subscribe(
-            res => {
+            result => {
                 this.spinner.hide()
-                res = res.body[0].organizationName[0].products
+                let res = result.body[0].products
                 //Assign initial values
                 var tmpProd = {
                     id:       res[0].id,
-                    name:     res[0].name,
+                    name:     res[0].productName,
                     quantity: res[0].quantity
                 }
                 this.products.push( tmpProd );
@@ -182,8 +183,9 @@ export class StockComponent implements OnInit {
                 });
 
                 //Get tanks data
-                this.http.get(this.getTanksUrl()).subscribe(res=>{
-                    console.log(res)
+                this.http.get<any[]>(this.getTanksUrl()).subscribe(res=>{
+                    //Array expected as result
+                    this.tanks = res;
                 });
                 
         });
