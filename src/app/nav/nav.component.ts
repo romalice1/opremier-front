@@ -57,22 +57,53 @@ export class NavComponent implements OnInit {
 	/* MENU SHOW/HIDE OPTIONS */
 	toggleDashboard(){
    		$('.dash_child').slideToggle(); //
+   		this.hideOthers('dash')
   	}
 
 	toggleEquipments(){
-   		$('.equip_child').slideToggle(); //
+   		$('.equip_child').slideToggle();
+   		this.hideOthers('equip')
   	} 
 
   	toggleVouchers(){
   		$('.voucher_child').slideToggle(); //
+  		this.hideOthers('voucher')
   	} 	
 
   	toggleUsers(){
   		$('.user_child').slideToggle(); //
+  		this.hideOthers('user')
   	} 
 
   	toggleLeftMenuBar(){
   		$('.left_menu_bar').slideToggle();
+  	}
+
+  	//Hide all other open submenus
+  	hideOthers(invoker){
+  		if(invoker=='dash'){
+  			$('.equip_child').hide()
+  			$('.voucher_child').hide()
+  			$('.user_child').hide()
+  		}
+
+  		if(invoker=='equip'){
+  			$('.dash_child').hide()
+  			$('.voucher_child').hide()
+  			$('.user_child').hide()
+  		}
+
+  		if(invoker=='voucher'){
+  			$('.dash_child').hide()
+  			$('.equip_child').hide()
+  			$('.user_child').hide()
+  		}
+
+  		if(invoker=='user'){
+  			$('.equip_child').hide()
+  			$('.voucher_child').hide()
+  			$('.dash_child').hide()
+  		}
   	}
 
 }

@@ -16,9 +16,16 @@ export class StockComponent implements OnInit {
     products = [] //[{id:string,name:string,quantity:string}] 
     salesData = {}; 
 
+    error:any =false
+
     tanksCapacityChart = {}
     transSummaryChart = {}
     productSalesChart = {}
+    tanks = {}
+
+    // Dates displayed on the template
+    startDate=""
+    endDate=""
 
     constructor(
       private http: HttpClient,
@@ -28,7 +35,12 @@ export class StockComponent implements OnInit {
       private date: DateService
       ) { }
 
-    // stockURL = this.api.PRODUCT+"/vendor_stock_products";
+
+
+    setErrorFalse(){
+        this.error = false;
+    }
+
     stockUrl(start, end){
       return this.api.PRODUCT+"/dealers/"+this.user.getUserSession().organization+"?start="+start+"&end="+end;
     }
@@ -45,33 +57,60 @@ export class StockComponent implements OnInit {
     // Load today
     loadToday(){
         this.loadComponentData( this.date.today(), this.date.today() );
+        this.updateDisplayDates( this.date.today(), this.date.today() )
     }
     
     //Load yesterday
     loadYesterday(){
         this.loadComponentData( this.date.yesterday(), this.date.yesterday() );
+        this.updateDisplayDates( this.date.yesterday(), this.date.yesterday() )
     }
      
     // Load last week
     loadLastWeek(){
         this.loadComponentData( this.date.lastWeek().start, this.date.lastWeek().end );
+        this.updateDisplayDates( this.date.lastWeek().start, this.date.lastWeek().end )
     }
 
     // Load last month
     loadLastMonth(){
         this.loadComponentData( this.date.lastMonth().start, this.date.lastMonth().end );
+        this.updateDisplayDates( this.date.lastMonth().start, this.date.lastMonth().end )
     }
 
     // Load last Year
     loadLastYear(){
         this.loadComponentData( this.date.lastYear().start, this.date.lastYear().end );
+        this.updateDisplayDates( this.date.lastYear().start, this.date.lastYear().end )
     }
-    /* END LOAD DATA PER DATES */
 
+    // load custom date
+    loadCustomPeriod(e:any){
+        e.preventDefault()
+
+        if( e.target.elements[0].value == '' && e.target.elements[1].value == '' ){
+            this.error = "Select date range";
+        }else{
+            this.error = false;
+            let start = this.date.dateFormater(e.target.elements[0].value)
+            let end = this.date.dateFormater(e.target.elements[1].value)
+            
+            this.loadComponentData(start, end)
+            this.updateDisplayDates( start, end )
+        }
+    }
+    
+    updateDisplayDates(start, end){
+        this.startDate = start
+        this.endDate = end
+    }
+
+    /* END LOAD DATA PER DATES */
 
     ngOnInit() {
         //Load all data needed by this component
         this.loadComponentData( this.date.today(), this.date.today() );
+        this.updateDisplayDates( this.date.today(), this.date.today() )
     }
 
 
@@ -79,15 +118,15 @@ export class StockComponent implements OnInit {
 
         this.spinner.show()
 
-        this.http.get<any[]>( this.stockUrl( startDate, endDate ) ).subscribe(
-            res => {
+        this.http.get<any>( this.stockUrl( startDate, endDate ) ).subscribe(
+            result => {
                 this.spinner.hide()
-
+                let res = result.body[0].products
                 //Assign initial values
                 var tmpProd = {
-                    id:       res[0].product.id,
-                    name:     res[0].product.name,
-                    quantity: res[0].currentQuantity
+                    id:       res[0].id,
+                    name:     res[0].productName,
+                    quantity: res[0].quantity
                 }
                 this.products.push( tmpProd );
                 
@@ -98,8 +137,8 @@ export class StockComponent implements OnInit {
 
                     //check if product already exists in array
                     for (var j=0; j < this.products.length; j++) {
-                        if (this.products[j].id === res[i].product.id) {
-                            this.products[j].quantity = this.products[j].quantity + res[i].currentQuantity;
+                        if (this.products[j].id === res[i].id) {
+                            this.products[j].quantity = this.products[j].quantity + res[i].quantity;
                             
                             isFound = true;
                         }
@@ -109,9 +148,9 @@ export class StockComponent implements OnInit {
                     if( !isFound ){
                         // Add a new object to the array
                         var prod = {
-                            id: res[i].product.id,
-                            name: res[i].product.name,
-                            quantity: res[i].currentQuantity
+                            id: res[i].id,
+                            name: res[i].name,
+                            quantity: res[i].quantity
                         }
                         this.products.push(prod);
                     }
@@ -144,8 +183,9 @@ export class StockComponent implements OnInit {
                 });
 
                 //Get tanks data
-                this.http.get(this.getTanksUrl()).subscribe(res=>{
-                    console.log(res)
+                this.http.get<any[]>(this.getTanksUrl()).subscribe(res=>{
+                    //Array expected as result
+                    this.tanks = res;
                 });
                 
         });
@@ -304,7 +344,7 @@ XtransData(input:any[]){
             },
             plotOptions: {
                 series: {
-                    dataLabels: {
+                    /*dataLabels: {
                         enabled: true,
                         format: '{point.y:,.0f} L',
                         borderRadius: 0,
@@ -314,7 +354,7 @@ XtransData(input:any[]){
                         y: -6
                     },
                     pointPadding: 0.1,
-                    groupPadding: 0.02
+                    groupPadding: 0.02*/
                 }
             },
             tooltip: {
@@ -322,16 +362,16 @@ XtransData(input:any[]){
                 headerFormat: null,
                 pointFormat: '<span style="color:{point.color}">{series.name}: <b>{point.y} </b> L</span><br />'
             },
-            series: [{
+            /*series: [{
                     showInLegend: false,
                     colorByPoint: true,
                     borderRadius: '4',
                     name: 'Current Quantity',
                     // colors: ['#057ac0', '#d9d928', '#000000'],
                     data: dispData
-                }],
+                }],/*
             responsive: {
-                rules: [{
+                ules: [{
                         condition: {
                             maxWidth: 500
                         },
@@ -368,7 +408,7 @@ XtransData(input:any[]){
                         }
                     }]
             }
-
+*/
       });
    }
   /* END tanks capacity */
@@ -409,105 +449,5 @@ XtransData(input:any[]){
       });
     } 
       /* END product sales */
-
-      /* Individual Tanks Capacity */
-      /* TANKS 1 GAUGE */
-    genTankChart(){
-        return new Chart({
-            chart: {
-                type: 'gauge',
-                plotBackgroundColor: null,
-                plotBackgroundImage: null,
-                plotBorderWidth: 0,
-                plotShadow: false,
-                backgroundColor: null
-            },
-
-
-            title: {
-                text: 'Tank 1'
-            },
-
-
-            tooltip: {
-                enabled: false
-            },
-
-
-            pane: {
-                center: ['50%', '85%'],
-                size: '140%',
-                startAngle: -90,
-                endAngle: 90,
-                background: {
-                    backgroundColor: '#ffffff',
-                    borderWidth: 0,
-                    outerRadius: '100%',
-                    innerRadius: '30%',
-                    shape: 'arc'
-                }
-            },
-
-            yAxis: {
-                min: 0,
-                max: 10000,
-                minorTickInterval: 'auto',
-                minorTickWidth: 1,
-                minorTickLength: 3,
-                minorTickPosition: 'outside',
-                minorTickColor: '#666',
-                tickPixelInterval: 45,
-                tickWidth: 2,
-                tickPosition: 'outside',
-                tickLength: 5,
-                tickColor: '#c0c0c0',
-                labels: {
-                    step: 2,
-                    rotation: 'auto'
-                },
-                title: {
-                    text: 'PMS1',
-                    y: -100
-                },
-
-                plotBands: [{
-                    from: 5000,
-                    to: 10000,
-                    color: '#55BF3B' //green
-                }, {
-                    from: 3000,
-                    to: 5000,
-                    color: '#DDDF0D' //yellow
-                }, {
-                    from: 0,
-                    to: 3000,
-                    color: '#DF5353' //red
-                }]
-            },
-
-            plotOptions: {
-                gauge: {
-                    dataLabels: {
-                        y: 37,
-                        borderWidth: 0,
-                        useHTML: true,
-                        format: '{point.y} Liters',
-                        color: '{point.color}'
-
-                    }
-                }
-            },
-
-            series: [{
-                name: 'Quantity',
-                data: [7200],
-                y: 70,
-                x: 2
-            }]
-
-        }); 
-    }
-    /* END TANKS 1 GAUGE */
-/* END Individual Tanks Capacity */
 
 }

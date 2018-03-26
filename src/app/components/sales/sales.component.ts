@@ -12,7 +12,16 @@ import { DateService } from '../../services/dates/date.service';
 })
 export class SalesComponent implements OnInit {
 
-    transactionData={};
+    transactionData:any = {};
+    totalTransactions;
+    totalAmount:any;
+
+    error:any;
+    
+    // Dates displayed on the template
+    startDate=""
+    endDate=""
+
     walletURl = this.api.WALLET;
     organizationURL = this.api.ORGANIZATION+"/organization_user/user/"
     
@@ -32,30 +41,57 @@ export class SalesComponent implements OnInit {
     }
 
     /* LOAD DATA PER DATES */
-    // Load today
+     // Load today
     loadToday(){
         this.loadComponentData( this.date.today(), this.date.today() );
+        this.updateDisplayDates( this.date.today(), this.date.today() )
     }
     
     //Load yesterday
     loadYesterday(){
         this.loadComponentData( this.date.yesterday(), this.date.yesterday() );
+        this.updateDisplayDates( this.date.yesterday(), this.date.yesterday() )
     }
      
     // Load last week
     loadLastWeek(){
         this.loadComponentData( this.date.lastWeek().start, this.date.lastWeek().end );
+        this.updateDisplayDates( this.date.lastWeek().start, this.date.lastWeek().end )
     }
 
     // Load last month
     loadLastMonth(){
         this.loadComponentData( this.date.lastMonth().start, this.date.lastMonth().end );
+        this.updateDisplayDates( this.date.lastMonth().start, this.date.lastMonth().end )
     }
 
     // Load last Year
     loadLastYear(){
         this.loadComponentData( this.date.lastYear().start, this.date.lastYear().end );
+        this.updateDisplayDates( this.date.lastYear().start, this.date.lastYear().end )
     }
+
+    // load custom date
+    loadCustomPeriod(e:any){
+        e.preventDefault()
+
+        if( e.target.elements[0].value == '' && e.target.elements[1].value == '' ){
+            this.error = "Select date range";
+        }else{
+            this.error = false;
+            let start = this.date.dateFormater(e.target.elements[0].value)
+            let end = this.date.dateFormater(e.target.elements[1].value)
+            
+            this.loadComponentData(start, end)
+            this.updateDisplayDates( start, end )
+        }
+    }
+
+    updateDisplayDates(start, end){
+        this.startDate = start
+        this.endDate = end
+    }
+
     /* END LOAD DATA PER DATES */
 
 
@@ -66,8 +102,10 @@ export class SalesComponent implements OnInit {
     loadComponentData(start, end){
         this.http.get<any>( this.getSalesUrl(start, end) ).subscribe(
             res => {
+                // this.totalAmount = this.calculateTotalAmount(res.body.data);
+                // this.totalTransactions = res.body.data.lenght
                 this.transactionData = res;
-
+                
                 //prepare chart-ready data
                 // {
                 //     type:"column",
@@ -89,6 +127,15 @@ export class SalesComponent implements OnInit {
                 this.transactionsChart = this.generateTransactionsChart(0,0);
                 this.salesPerPaymentMethodChart = this.genSalesPerPaymentMethodChart( series );
         });
+    }
+
+    //calculate totalAmount
+    calculateTotalAmount(data:any[]){
+        let total = 0;
+        for (var i = 0; i < data.length; i++) {
+            total = total + data[i].amount;
+        }
+        return total;
     }
 
 	/* TRANSACTIONS time vs AMOUNT */
